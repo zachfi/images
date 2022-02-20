@@ -22,5 +22,3 @@ RUN ./autogen.sh && \
   make
 
 RUN mv cgminer /usr/local/bin/cgminer
-
-ENTRYPOINT [ "/usr/local/bin/cgminer" ]
