@@ -23,4 +23,4 @@ RUN ./autogen.sh && \
 
 RUN mv cgminer /usr/local/bin/cgminer
 
-ENTRYPOINT [ "cgminer" ]
+ENTRYPOINT [ "/usr/local/bin/cgminer" ]
