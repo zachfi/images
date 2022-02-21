@@ -18,7 +18,7 @@ WORKDIR /cgminer/cgminer-vthoang
 RUN ./autogen.sh && \
   export LIBCURL_CFLAGS='-I/usr/include/curl' && \
   export LIBCURL_LIBS='-L/usr/lib -lcurl' && \
-  CFLAGS="-O2 -Wall -march=native" ./configure --enable-gekko && \
+  CFLAGS="-O2 -Wall" ./configure --enable-gekko && \
   make
 
 RUN mv cgminer /usr/local/bin/cgminer
