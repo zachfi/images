@@ -17,3 +17,5 @@ RUN git clone https://aur.archlinux.org/yay.git \
   && cd \
   # Clean up
   && rm -rf .cache yay
+
+RUN yay -S --noconfirm neovim

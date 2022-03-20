@@ -4,6 +4,7 @@ all: nvidia xmrig shell miner
 
 nvidia:
 	@docker build nvidia/ -t xaque208/miner:nvidia
+	docker push xaque208/miner:nvidia
 
 xmrig:
 	@docker build xmrig/ -t xaque208/miner:xmrig
