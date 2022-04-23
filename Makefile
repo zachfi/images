@@ -18,6 +18,6 @@ miner:
 
 printer:
 	docker build p910nd -t xaque208/p910nd:latest
-	# docker push xaque208/p910nd:latest
+	docker push xaque208/p910nd:latest
 
 .PHONY: all xmrig nvidia shell printer
