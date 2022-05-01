@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk --update --no-cache add syslog-ng
+RUN apk --update --no-cache add syslog-ng syslog-ng-scl syslog-ng-json syslog-ng-tags-parser
 
 ADD syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
 
