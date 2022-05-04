@@ -4,7 +4,7 @@ all: nvidia xmrig shell miner
 
 nvidia:
 	@docker build nvidia/ -t xaque208/miner:nvidia
-	docker push xaque208/miner:nvidia
+	@docker push xaque208/miner:nvidia
 
 xmrig:
 	@docker build xmrig/ -t xaque208/miner:xmrig
@@ -21,7 +21,7 @@ printer:
 	docker push xaque208/p910nd:latest
 
 syslog:
-	docker build syslog -t xaque208/syslog:latest
-	docker push xaque208/syslog:latest
+	@docker build syslog -t xaque208/syslog:latest
+	@docker push xaque208/syslog:latest
 
 .PHONY: all xmrig nvidia shell printer syslog
