@@ -1,4 +1,4 @@
-FROM  alpine:latest
+FROM  alpine:3.16
 
 RUN   adduser -S -D -H -h /xmrig miner
 

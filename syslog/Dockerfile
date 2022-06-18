@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.16
 
 RUN apk --update --no-cache add syslog-ng syslog-ng-scl syslog-ng-json syslog-ng-tags-parser
 

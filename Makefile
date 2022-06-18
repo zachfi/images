@@ -1,6 +1,12 @@
 #
 
 all: nvidia xmrig shell miner
+images	= shell p910nd
+
+build:
+	@for image in $(images); do \
+    docker build $$image; \
+	done
 
 nvidia:
 	@docker build nvidia/ -t xaque208/miner:nvidia
@@ -24,4 +30,16 @@ syslog:
 	@docker build syslog -t xaque208/syslog:latest
 	@docker push xaque208/syslog:latest
 
-.PHONY: all xmrig nvidia shell printer syslog
+gomplate:
+	@docker build gomplate -t xaque208/gomplate:latest
+	@docker push xaque208/gomplate:latest
+
+unbound:
+	@docker build unbound -t xaque208/unbound:latest
+	@docker push xaque208/unbound:latest
+
+nsd:
+	@docker build nsd -t xaque208/nsd:latest
+	@docker push xaque208/nsd:latest
+
+.PHONY: all xmrig nvidia shell printer syslog gomplate build nsd unbound
