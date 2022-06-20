@@ -1,6 +1,15 @@
+FROM golang:alpine3.16 as builder
+
+WORKDIR /workspace/
+
+RUN go install github.com/letsencrypt/unbound_exporter@latest
+RUN which unbound_exporter
+
 FROM alpine:3.16
 
-LABEL description "DNS caching server"
+LABEL description "Unbound caching DNS resolver"
+
+COPY --from=builder /go/bin/unbound_exporter /usr/bin
 
 RUN set -xe; apk add --no-cache unbound ca-certificates openssl ldns-tools curl
 
