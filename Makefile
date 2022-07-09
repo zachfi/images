@@ -42,4 +42,8 @@ nsd:
 	@docker build nsd -t xaque208/nsd:latest
 	@docker push xaque208/nsd:latest
 
-.PHONY: all xmrig nvidia shell printer syslog gomplate build nsd unbound
+chrony:
+	@docker build chrony -t xaque208/chrony:latest
+	@docker push xaque208/chrony:latest
+
+.PHONY: all xmrig nvidia shell printer syslog gomplate build nsd unbound chrony
