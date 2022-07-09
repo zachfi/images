@@ -1,8 +1,9 @@
 FROM  alpine:3.16
-RUN apk --update --no-cache add chrony gpsd gpsd-clients bash && \
+LABEL description "Time sync with Chrony and GPSd"
+RUN apk --update --no-cache add chrony gpsd gpsd-clients && \
   rm -rf /var/cache/apk/* /etc/chrony
-COPY files/start.sh /usr/local/bin/start.sh
-RUN chmod 0755 /usr/local/bin/start.sh
+COPY entrypoint.sh /sbin/entrypoint.sh
 WORKDIR /tmp
 EXPOSE 123/udp
-ENTRYPOINT ["/usr/local/bin/start.sh"]
+ENTRYPOINT [ "/sbin/entrypoint.sh" ]
+CMD chronyd -n -d -s -f "/etc/chrony.conf"
