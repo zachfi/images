@@ -1,7 +1,7 @@
 #
 
 all: nvidia xmrig shell miner
-images	= shell p910nd
+images	= shell p910nd aur
 
 build:
 	@for image in $(images); do \
@@ -51,4 +51,10 @@ dhcp:
 	@docker build dhcp -t xaque208/dhcp:latest
 	@docker push xaque208/dhcp:latest
 
-.PHONY: all xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp
+aur:
+	mkdir -p aur/repo
+	repo-add aur/repo/repo.db.tar.gz /home/zach/go/src/github.com/xaque208/nodemanager/contrib/arch/nodemanager-0.1.1+1+g82b5f09-1-x86_64.pkg.tar.zst
+	@docker build aur -t xaque208/aur:latest
+
+
+.PHONY: all xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp aur
