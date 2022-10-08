@@ -53,8 +53,9 @@ dhcp:
 
 aur:
 	mkdir -p aur/repo
-	repo-add aur/repo/repo.db.tar.gz /home/zach/go/src/github.com/xaque208/nodemanager/contrib/arch/nodemanager-0.1.1+1+g82b5f09-1-x86_64.pkg.tar.zst
+	cp /home/zach/go/src/github.com/xaque208/nodemanager/contrib/arch/nodemanager-0.1.1+1+g82b5f09-1-x86_64.pkg.tar.zst aur/repo
+	repo-add aur/repo/custom.db.tar.gz aur/repo/*pkg.tar.zst
 	@docker build aur -t xaque208/aur:latest
-
+	@echo docker push xaque208/aur:latest
 
 .PHONY: all xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp aur
