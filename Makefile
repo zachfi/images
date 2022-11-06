@@ -16,8 +16,8 @@ xmrig:
 	@docker build xmrig/ -t xaque208/miner:xmrig
 
 shell:
-	@docker build shell -t xaque208/shell:latest
-	@docker push xaque208/shell:latest
+	@docker build shell -t xaque208/shell:archlinux
+	@docker push xaque208/shell:archlinux
 
 miner:
 	@docker build cgminer-gekko -t xaque208/miner:cgminer-gekko
