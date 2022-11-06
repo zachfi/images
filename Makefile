@@ -59,4 +59,9 @@ aur:
 	@docker build aur -t xaque208/aur:latest
 	@docker push xaque208/aur:latest
 
-.PHONY: all xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp aur
+pkgng:
+	@rsync -aL --del rsync://olaf.wire.znet/freebsd-pkg/ pkgng/repo/
+	@docker build pkgng -t xaque208/www:larch
+	@echo docker push xaque208/www:larch
+
+.PHONY: all xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp aur pkgng
