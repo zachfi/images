@@ -7,3 +7,9 @@
 [submodule "dovecot"]
 	path = dovecot
 	url = git@github.com:LordVeovis/docker-dovecot.git
+[submodule "aur/duo_unix"]
+	path = aur/duo_unix
+	url = https://aur.archlinux.org/duo_unix.git
+[submodule "aur/gomplate-bin"]
+	path = aur/gomplate-bin
+	url = https://aur.archlinux.org/gomplate-bin.git
