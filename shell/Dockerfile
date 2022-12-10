@@ -18,4 +18,4 @@ RUN git clone https://aur.archlinux.org/yay.git \
   # Clean up
   && rm -rf .cache yay
 
-RUN yay -Sy --noconfirm neovim restic aria2 rtorrent
+RUN yay -Sy --noconfirm go neovim restic
