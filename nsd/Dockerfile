@@ -1,4 +1,4 @@
-FROM golang:alpine3.16 as builder
+FROM golang:alpine3.17 as builder
 WORKDIR /workspace/
 RUN go install github.com/optix2000/nsd_exporter@latest
 

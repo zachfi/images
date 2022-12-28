@@ -1,11 +1,11 @@
 #
 
-all: nvidia xmrig shell miner
-images	= shell p910nd aur
+all: nvidia 
+images	= shell p910nd aur unbound nsd syslog chrony
 
 build:
 	@for image in $(images); do \
-    docker build $$image; \
+    docker build $$image -t xaque208/$$image; \
 	done
 
 nvidia:
@@ -43,6 +43,10 @@ nsd:
 	@docker build nsd -t xaque208/nsd:latest
 	@docker push xaque208/nsd:latest
 
+openldap_exporter:
+	@docker build openldap_exporter -t xaque208/openldap_exporter:latest
+	@docker push xaque208/openldap_exporter:latest
+
 chrony:
 	@docker build chrony -t xaque208/chrony:latest
 	@docker push xaque208/chrony:latest
@@ -66,4 +70,4 @@ pkgng:
 	@docker build pkgng -t xaque208/www:larch
 	@echo docker push xaque208/www:larch
 
-.PHONY: all xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp aur pkgng
+.PHONY: all xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp aur pkgng openldap_exporter
