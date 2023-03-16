@@ -13,3 +13,6 @@
 [submodule "aur/gomplate-bin"]
 	path = aur/gomplate-bin
 	url = https://aur.archlinux.org/gomplate-bin.git
+[submodule "aur/k3s-bin"]
+	path = aur/k3s-bin
+	url = https://aur.archlinux.org/k3s-bin.git
