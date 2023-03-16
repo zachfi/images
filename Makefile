@@ -57,10 +57,12 @@ dhcp:
 
 aur:
 	@mkdir -p aur/repo
-	@rm aur/repo/*.pkg.tar.zst
-	@cp aur/duo_unix/*.pkg.tar.zst aur/repo
-	@cp aur/gomplate-bin/*.pkg.tar.zst aur/repo
-	@cp /home/zach/go/src/github.com/xaque208/nodemanager/contrib/arch/nodemanager*.pkg.tar.zst aur/repo
+	@rm -f aur/repo/*.pkg.tar.zst
+	@for pkg in duo_unix gomplate-bin; do \
+		pushd aur/$$pkg; makepkg; popd; \
+		cp -u aur/$$pkg/*.pkg.tar.zst aur/repo; \
+	done
+	@cp /home/zach/go/src/github.com/zachfi/nodemanager/contrib/arch/nodemanager*.pkg.tar.zst aur/repo
 	@repo-add aur/repo/custom.db.tar.gz aur/repo/*pkg.tar.zst
 	@docker build aur -t xaque208/aur:latest
 	@docker push xaque208/aur:latest
