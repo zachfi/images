@@ -3,6 +3,10 @@
 all: nvidia 
 images	= shell p910nd aur unbound nsd syslog chrony
 
+modules:
+	@git submodule init
+	@git submodule update
+
 build:
 	@for image in $(images); do \
     docker build $$image -t xaque208/$$image; \
@@ -51,18 +55,25 @@ chrony:
 	@docker build chrony -t xaque208/chrony:latest
 	@docker push xaque208/chrony:latest
 
+motion:
+	@docker build motion -t xaque208/motion:latest
+	@docker push xaque208/motion:latest
+
 dhcp:
 	@docker build dhcp -t xaque208/dhcp:latest
 	@docker push xaque208/dhcp:latest
 
+aur_pkgs = duo_unix gomplate-bin k3s-bin
 aur:
 	@mkdir -p aur/repo
 	@rm -f aur/repo/*.pkg.tar.zst
-	@for pkg in duo_unix gomplate-bin; do \
-		pushd aur/$$pkg; makepkg; popd; \
-		cp -u aur/$$pkg/*.pkg.tar.zst aur/repo; \
-	done
 	@cp /home/zach/go/src/github.com/zachfi/nodemanager/contrib/arch/nodemanager*.pkg.tar.zst aur/repo
+	@rm -f aur/repo/*.pkg.tar.zst
+	@for image in $(aur_pkgs); do \
+		pushd aur/$$image; makepkg; popd; \
+	done
+	@cp aur/*/*.pkg.tar.zst aur/repo
+	@cp /home/zach/go/src/github.com/xaque208/nodemanager/contrib/arch/nodemanager*.pkg.tar.zst aur/repo
 	@repo-add aur/repo/custom.db.tar.gz aur/repo/*pkg.tar.zst
 	@docker build aur -t xaque208/aur:latest
 	@docker push xaque208/aur:latest
@@ -72,4 +83,4 @@ pkgng:
 	@docker build pkgng -t xaque208/www:larch
 	@echo docker push xaque208/www:larch
 
-.PHONY: all xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp aur pkgng openldap_exporter
+.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp aur pkgng openldap_exporter motion
