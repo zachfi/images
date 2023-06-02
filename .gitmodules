@@ -16,3 +16,12 @@
 [submodule "aur/k3s-bin"]
 	path = aur/k3s-bin
 	url = https://aur.archlinux.org/k3s-bin.git
+[submodule "aur/nvidia-container-runtime"]
+	path = aur/nvidia-container-runtime
+	url = https://aur.archlinux.org/nvidia-container-runtime.git
+[submodule "aur/nvidia-container-toolkit"]
+	path = aur/nvidia-container-toolkit
+	url = https://aur.archlinux.org/nvidia-container-toolkit.git
+[submodule "aur/libnvidia-container"]
+	path = aur/libnvidia-container
+	url = https://aur.archlinux.org/libnvidia-container.git

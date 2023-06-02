@@ -63,17 +63,18 @@ dhcp:
 	@docker build dhcp -t xaque208/dhcp:latest
 	@docker push xaque208/dhcp:latest
 
-aur_pkgs = duo_unix gomplate-bin k3s-bin
+dhcp-kea:
+	@docker build dhcp-kea -t xaque208/dhcp-kea:latest
+	@docker push xaque208/dhcp-kea:latest
+
+aur_pkgs = duo_unix gomplate-bin k3s-bin nvidia-container-runtime nvidia-container-toolkit libnvidia-container nodemanager
 aur:
 	@mkdir -p aur/repo
-	@rm -f aur/repo/*.pkg.tar.zst
-	@cp /home/zach/go/src/github.com/zachfi/nodemanager/contrib/arch/nodemanager*.pkg.tar.zst aur/repo
 	@rm -f aur/repo/*.pkg.tar.zst
 	@for image in $(aur_pkgs); do \
 		pushd aur/$$image; makepkg; popd; \
 	done
 	@cp aur/*/*.pkg.tar.zst aur/repo
-	@cp /home/zach/go/src/github.com/xaque208/nodemanager/contrib/arch/nodemanager*.pkg.tar.zst aur/repo
 	@repo-add aur/repo/custom.db.tar.gz aur/repo/*pkg.tar.zst
 	@docker build aur -t xaque208/aur:latest
 	@docker push xaque208/aur:latest
@@ -83,4 +84,4 @@ pkgng:
 	@docker build pkgng -t xaque208/www:larch
 	@echo docker push xaque208/www:larch
 
-.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp aur pkgng openldap_exporter motion
+.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea aur pkgng openldap_exporter motion
