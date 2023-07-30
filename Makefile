@@ -75,6 +75,7 @@ aur:
 		pushd aur/$$image; makepkg; popd; \
 	done
 	@cp aur/*/*.pkg.tar.zst aur/repo
+	@cp /home/zach/go/src/github.com/zachfi/nodemanager/contrib/arch/nodemanager*.pkg.tar.zst aur/repo
 	@repo-add aur/repo/custom.db.tar.gz aur/repo/*pkg.tar.zst
 	@docker build aur -t xaque208/aur:latest
 	@docker push xaque208/aur:latest
