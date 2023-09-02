@@ -1,6 +1,6 @@
 #
 
-all: nvidia shell p910nd aur unbound nsd syslog chrony
+all: shell p910nd aur unbound nsd syslog chrony
 images	= shell p910nd aur unbound nsd syslog chrony
 
 modules:
