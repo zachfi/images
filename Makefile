@@ -1,6 +1,6 @@
 #
 
-all: shell p910nd aur unbound nsd syslog chrony
+all: shell p910nd aur unbound nsd syslog chrony dhcp-kea
 images	= shell p910nd aur unbound nsd syslog chrony
 
 modules:
