@@ -1,12 +1,6 @@
 [submodule "nsd"]
 	path = nsd
 	url = git@github.com:LordVeovis/docker-nsd.git
-[submodule "postfix"]
-	path = postfix
-	url = git@github.com:LordVeovis/docker-postfix.git
-[submodule "dovecot"]
-	path = dovecot
-	url = git@github.com:LordVeovis/docker-dovecot.git
 [submodule "aur/duo_unix"]
 	path = aur/duo_unix
 	url = https://aur.archlinux.org/duo_unix.git
