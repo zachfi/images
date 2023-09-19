@@ -1,7 +1,7 @@
 #
 
-all: shell p910nd aur unbound nsd syslog chrony dhcp-kea
-images	= shell p910nd aur unbound nsd syslog chrony
+all: shell p910nd aur unbound nsd syslog chrony dhcp-kea postfix dovecot
+images	= shell p910nd aur unbound nsd syslog chrony postfix dovecot
 
 modules:
 	@git submodule init
@@ -67,6 +67,14 @@ dhcp-kea:
 	@docker build dhcp-kea -t zachfi/dhcp-kea:latest
 	@docker push zachfi/dhcp-kea:latest
 
+dovecot:
+	@docker build dovecot -t zachfi/dovecot:latest
+	@docker push zachfi/dovecot:latest
+
+postfix:
+	@docker build postfix -t zachfi/postfix:latest
+	@docker push zachfi/postfix:latest
+
 aur_pkgs = duo_unix gomplate-bin k3s-bin nvidia-container-runtime nvidia-container-toolkit libnvidia-container nodemanager
 aur:
 	@mkdir -p aur/repo
@@ -85,4 +93,4 @@ pkgng:
 	@docker build pkgng -t zachfi/www:larch
 	@echo docker push zachfi/www:larch
 
-.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea aur pkgng openldap_exporter motion
+.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea aur pkgng openldap_exporter motion postfix dovecot
