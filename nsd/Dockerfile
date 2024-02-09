@@ -1,8 +1,8 @@
-FROM golang:alpine3.18 as builder
+FROM golang:alpine3.19 as builder
 WORKDIR /workspace/
 RUN go install github.com/optix2000/nsd_exporter@latest
 
-FROM alpine:3.18
+FROM alpine:3.19
 LABEL description "NSD authoratative DNS resolver"
 COPY --from=builder /go/bin/nsd_exporter /usr/bin
 RUN set -xe; apk add --no-cache nsd ca-certificates openssl ldns-tools curl && rm -rf /var/cache/apk/*

@@ -1,4 +1,4 @@
-FROM golang:alpine3.17 as builder
+FROM golang:alpine3.19 as builder
 WORKDIR /workspace/
 RUN apk add git
 RUN go install github.com/tomcz/openldap_exporter/v2@v2.2.2
