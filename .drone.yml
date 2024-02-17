@@ -1,8 +1,9 @@
 kind: pipeline
+type: kubernetes
 name: default
+
 steps:
-- commands:
-  - make
-  image: alpine
-  name: make
-type: docker
+  - commands:
+      - make
+    image: alpine
+    name: make
