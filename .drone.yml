@@ -4,7 +4,12 @@ name: default
 
 steps:
   - commands:
-      - make
+      - img build -t zachfi/printer:latest printer
     image: zachfi/build-image
+    environment:
+      DOCKER_USERNAME:
+        from_secret: DOCKER_USERNAME
+      DOCKER_PASSWORD:
+        from_secret: DOCKER_PASSWORD
     pull: always
     name: make
