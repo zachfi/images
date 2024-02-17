@@ -1,15 +1,93 @@
 kind: pipeline
-type: kubernetes
-name: default
-
+name: build
 steps:
-  - commands:
-      - img build -t zachfi/printer:latest printer
-    image: zachfi/build-image
-    environment:
-      DOCKER_USERNAME:
-        from_secret: DOCKER_USERNAME
-      DOCKER_PASSWORD:
-        from_secret: DOCKER_PASSWORD
-    pull: always
-    name: make
+- image: plugins/docker
+  name: docker-zachfi/printer
+  settings:
+    context: printer
+    dockerfile: printer/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/printer
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/unbound
+  settings:
+    context: unbound
+    dockerfile: unbound/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/unbound
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/nsd
+  settings:
+    context: nsd
+    dockerfile: nsd/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/nsd
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/syslog
+  settings:
+    context: syslog
+    dockerfile: syslog/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/syslog
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/chrony
+  settings:
+    context: chrony
+    dockerfile: chrony/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/chrony
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/dhcp-kea
+  settings:
+    context: dhcp-kea
+    dockerfile: dhcp-kea/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/dhcp-kea
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/postfix
+  settings:
+    context: postfix
+    dockerfile: postfix/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/postfix
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/dovecot
+  settings:
+    context: dovecot
+    dockerfile: dovecot/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/dovecot
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/shell
+  settings:
+    context: shell
+    dockerfile: shell/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/shell
+    username:
+      from_secret: DOCKER_USERNAME

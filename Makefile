@@ -1,19 +1,12 @@
 #
 
-all: shell p910nd aur unbound nsd syslog chrony dhcp-kea postfix dovecot
-images	= shell p910nd aur unbound nsd syslog chrony postfix dovecot
-
 drone:
-	drone jsonnet --format
+	@drone jsonnet --format
+	@drone lint
 
 modules:
 	@git submodule init
 	@git submodule update
-
-build:
-	@for image in $(images); do \
-    docker build $$image -t zachfi/$$image; \
-	done
 
 build-image:
 	@docker build build-image/ -t zachfi/build-image:latest
@@ -26,41 +19,18 @@ nvidia:
 xmrig:
 	@docker build xmrig/ -t zachfi/miner:xmrig
 
-shell:
-	@docker build shell -t zachfi/shell:archlinux
-	@docker push zachfi/shell:archlinux
 
 miner:
 	@docker build cgminer-gekko -t zachfi/miner:cgminer-gekko
 	@docker push zachfi/miner:cgminer-gekko
 
-printer:
-	@docker build p910nd -t zachfi/p910nd:latest
-	@docker push zachfi/p910nd:latest
-
-syslog:
-	@docker build syslog -t zachfi/syslog:latest
-	@docker push zachfi/syslog:latest
-
 gomplate:
 	@docker build gomplate -t zachfi/gomplate:latest
 	@docker push zachfi/gomplate:latest
 
-unbound:
-	@docker build unbound -t zachfi/unbound:latest
-	@docker push zachfi/unbound:latest
-
-nsd:
-	@docker build nsd -t zachfi/nsd:latest
-	@docker push zachfi/nsd:latest
-
 openldap_exporter:
 	@docker build openldap_exporter -t zachfi/openldap_exporter:latest
 	@docker push zachfi/openldap_exporter:latest
-
-chrony:
-	@docker build chrony -t zachfi/chrony:latest
-	@docker push zachfi/chrony:latest
 
 motion:
 	@docker build motion -t zachfi/motion:latest
@@ -73,14 +43,6 @@ dhcp:
 dhcp-kea:
 	@docker build dhcp-kea -t zachfi/dhcp-kea:latest
 	@docker push zachfi/dhcp-kea:latest
-
-dovecot:
-	@docker build dovecot -t zachfi/dovecot:latest
-	@docker push zachfi/dovecot:latest
-
-postfix:
-	@docker build postfix -t zachfi/postfix:latest
-	@docker push zachfi/postfix:latest
 
 aur_pkgs = duo_unix gomplate-bin k3s-bin nvidia-container-runtime nvidia-container-toolkit libnvidia-container nodemanager
 aur:
