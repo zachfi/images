@@ -15,6 +15,10 @@ build:
     docker build $$image -t zachfi/$$image; \
 	done
 
+build-image:
+	@docker build build-image/ -t zachfi/build-image:latest
+	@docker push zachfi/build-image:latest
+
 nvidia:
 	@docker build nvidia/ -t zachfi/miner:nvidia
 	@docker push zachfi/miner:nvidia
@@ -96,4 +100,4 @@ pkgng:
 	@docker build pkgng -t zachfi/www:larch
 	@echo docker push zachfi/www:larch
 
-.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea aur pkgng openldap_exporter motion postfix dovecot
+.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea aur pkgng openldap_exporter motion postfix dovecot build-image

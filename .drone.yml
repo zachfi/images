@@ -5,5 +5,5 @@ name: default
 steps:
   - commands:
       - make
-    image: alpine
+    image: zachfi/build-image
     name: make
