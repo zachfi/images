@@ -6,4 +6,5 @@ steps:
   - commands:
       - make
     image: zachfi/build-image
+    pull: always
     name: make
