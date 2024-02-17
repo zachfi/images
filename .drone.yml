@@ -1,0 +1,8 @@
+kind: pipeline
+name: default
+steps:
+- commands:
+  - make
+  image: alpine
+  name: make
+type: docker

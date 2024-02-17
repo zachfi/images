@@ -3,6 +3,9 @@
 all: shell p910nd aur unbound nsd syslog chrony dhcp-kea postfix dovecot
 images	= shell p910nd aur unbound nsd syslog chrony postfix dovecot
 
+drone:
+	drone jsonnet --format
+
 modules:
 	@git submodule init
 	@git submodule update
