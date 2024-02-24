@@ -1,7 +1,10 @@
-FROM alpine:3.19
+FROM golang:1.22.0-alpine3.19
 LABEL maintainer="none"
 
-RUN apk update && apk add make go buildah git shadow-subids findmnt util-linux rootlesskit buildkit buildctl docker
+# RUN apk update && apk add make go buildah git shadow-subids findmnt util-linux rootlesskit buildkit buildctl docker
+RUN apk update && apk add make git util-linux bash docker kubectl
+
+RUN go install 
 
 # RUN echo nope:100000:65536 > /etc/subuid
 # RUN echo nope:100000:65536 > /etc/subgid
