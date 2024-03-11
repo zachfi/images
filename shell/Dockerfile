@@ -1,7 +1,6 @@
 FROM archlinux/archlinux:base-devel
 LABEL maintainer="none"
-
-RUN pacman -Syu --needed --noconfirm git
+RUN pacman -Syu --needed --noconfirm git neovim restic kubectl aarch64-linux-gnu-binutils aarch64-linux-gnu-gcc arm-none-eabi-binutils arm-none-eabi-gcc devtools
 
 # makepkg user and workdir
 ARG user=makepkg
@@ -9,13 +8,3 @@ RUN useradd --system --create-home $user \
   && echo "$user ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$user
 USER $user
 WORKDIR /home/$user
-
-# Install yay
-RUN git clone https://aur.archlinux.org/yay.git \
-  && cd yay \
-  && makepkg -sri --needed --noconfirm \
-  && cd \
-  # Clean up
-  && rm -rf .cache yay
-
-RUN yay -Sy --noconfirm go neovim restic
