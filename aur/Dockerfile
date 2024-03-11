@@ -1,2 +1,0 @@
-FROM nginx:alpine
-COPY repo/ /usr/share/nginx/html/

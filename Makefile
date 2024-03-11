@@ -44,19 +44,6 @@ dhcp-kea:
 	@docker build dhcp-kea -t zachfi/dhcp-kea:latest
 	@docker push zachfi/dhcp-kea:latest
 
-aur_pkgs = duo_unix gomplate-bin k3s-bin nvidia-container-runtime nvidia-container-toolkit libnvidia-container nodemanager
-aur:
-	@mkdir -p aur/repo
-	@rm -f aur/repo/*.pkg.tar.zst
-	@for image in $(aur_pkgs); do \
-		pushd aur/$$image; makepkg; popd; \
-	done
-	@cp aur/*/*.pkg.tar.zst aur/repo
-	@cp /home/zach/go/src/github.com/zachfi/nodemanager/contrib/arch/nodemanager*.pkg.tar.zst aur/repo
-	@repo-add aur/repo/custom.db.tar.gz aur/repo/*pkg.tar.zst
-	@docker build aur -t zachfi/aur:latest
-	@docker push zachfi/aur:latest
-
 pkgng:
 	@rsync -aL --del rsync://olaf.wire.znet/freebsd-pkg/ pkgng/repo/
 	@docker build pkgng -t zachfi/www:larch
