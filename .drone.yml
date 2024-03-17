@@ -91,3 +91,6 @@ steps:
     repo: zachfi/shell
     username:
       from_secret: DOCKER_USERNAME
+trigger:
+  event:
+  - push

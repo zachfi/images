@@ -34,4 +34,5 @@
     this.dockerImage('zachfi/%s' % f, f)
     for f in stdImages
   ],
+  trigger: { event: ['push'] },
 }
