@@ -92,5 +92,7 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 trigger:
+  branch:
+  - main
   event:
   - push

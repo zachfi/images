@@ -24,7 +24,6 @@ nvidia:
 xmrig:
 	@docker build xmrig/ -t zachfi/miner:xmrig
 
-
 miner:
 	@docker build cgminer-gekko -t zachfi/miner:cgminer-gekko
 	@docker push zachfi/miner:cgminer-gekko
