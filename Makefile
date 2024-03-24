@@ -49,8 +49,7 @@ dhcp-kea:
 	@docker push zachfi/dhcp-kea:latest
 
 pkgng:
-	@rsync -aL --del rsync://olaf.wire.znet/freebsd-pkg/ pkgng/repo/
-	@docker build pkgng -t zachfi/www:larch
-	@echo docker push zachfi/www:larch
+	@docker build pkgng -t zachfi/www:pkg
+	@docker push zachfi/www:pkg
 
-.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea aur pkgng openldap_exporter motion postfix dovecot build-image
+.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea pkgng openldap_exporter motion postfix dovecot build-image
