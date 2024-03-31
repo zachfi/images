@@ -14,8 +14,8 @@ build-image:
 
 shell:
 	@docker pull archlinux/archlinux:base-devel
-	@docker build shell/ -t zachfi/shell:archlinux
-	@docker push zachfi/shell:archlinux
+	@docker build shell/ -t zachfi/shell:latest
+	@docker push zachfi/shell:latest
 
 nvidia:
 	@docker build nvidia/ -t zachfi/miner:nvidia
