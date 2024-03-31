@@ -12,13 +12,9 @@ local stdImages = [
 local archs = ['amd64', 'arm64'];
 local owner = 'zachfi';
 
-local pipeline(name, arch='amd64') = {
+local pipeline(name) = {
   kind: 'pipeline',
   name: name,
-  platform: {
-    os: 'linux',
-    arch: arch,
-  },
   steps: [],
   depends_on: [],
   trigger: {
@@ -35,10 +31,11 @@ local pipeline(name, arch='amd64') = {
   },
 };
 
-local dockerImage(arch, name, dry=false) = {
+local dockerBuild(name, dry=false, platform='linux/amd64,linux/arm64') = {
   name: 'docker-%s/%s' % [owner, name],
   image: 'plugins/docker',
   pull_image: true,
+  platform: platform,
   settings: {
     dockerfile: '%s/Dockerfile' % name,
     context: name,
@@ -53,29 +50,24 @@ local dockerImage(arch, name, dry=false) = {
 };
 
 [
-  (
-    pipeline('docker-' + arch, arch) {
-      steps+: [
-        dockerImage(arch, f)
-        for f in stdImages
-      ],
-    }
-  )
-  for arch in archs
+  pipeline('publish') {
+    steps+: [
+      dockerBuild(f)
+      for f in stdImages
+    ],
+  },
 ]
 + [
-  (
-    pipeline('build-' + arch, arch) {
-      steps+: [
-        dockerImage(arch, f, dry=true)
-        for f in stdImages
+  pipeline('build') {
+    steps+: [
+      dockerBuild(f, dry=true)
+      for f in stdImages
+    ],
+    trigger: {
+      event: [
+        'push',
+        'pull_request',
       ],
-      trigger: {
-        event: [
-          'push',
-        ],
-      },
-    }
-  )
-  for arch in archs
+    },
+  },
 ]
