@@ -1,8 +1,14 @@
+---
+depends_on: []
 kind: pipeline
-name: build
+name: docker-amd64
+platform:
+  arch: amd64
+  os: linux
 steps:
 - image: plugins/docker
   name: docker-zachfi/printer
+  pull_image: true
   settings:
     context: printer
     dockerfile: printer/Dockerfile
@@ -13,6 +19,7 @@ steps:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
   name: docker-zachfi/unbound
+  pull_image: true
   settings:
     context: unbound
     dockerfile: unbound/Dockerfile
@@ -23,6 +30,7 @@ steps:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
   name: docker-zachfi/nsd
+  pull_image: true
   settings:
     context: nsd
     dockerfile: nsd/Dockerfile
@@ -33,6 +41,7 @@ steps:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
   name: docker-zachfi/syslog
+  pull_image: true
   settings:
     context: syslog
     dockerfile: syslog/Dockerfile
@@ -43,6 +52,7 @@ steps:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
   name: docker-zachfi/chrony
+  pull_image: true
   settings:
     context: chrony
     dockerfile: chrony/Dockerfile
@@ -53,6 +63,7 @@ steps:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
   name: docker-zachfi/dhcp-kea
+  pull_image: true
   settings:
     context: dhcp-kea
     dockerfile: dhcp-kea/Dockerfile
@@ -63,6 +74,7 @@ steps:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
   name: docker-zachfi/postfix
+  pull_image: true
   settings:
     context: postfix
     dockerfile: postfix/Dockerfile
@@ -73,6 +85,7 @@ steps:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
   name: docker-zachfi/dovecot
+  pull_image: true
   settings:
     context: dovecot
     dockerfile: dovecot/Dockerfile
@@ -83,6 +96,7 @@ steps:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
   name: docker-zachfi/shell
+  pull_image: true
   settings:
     context: shell
     dockerfile: shell/Dockerfile
@@ -92,7 +106,337 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 trigger:
-  branch:
-  - main
-  event:
-  - push
+  ref:
+  - refs/heads/main
+  - refs/tags/v*
+---
+depends_on: []
+kind: pipeline
+name: docker-arm64
+platform:
+  arch: arm64
+  os: linux
+steps:
+- image: plugins/docker
+  name: docker-zachfi/printer
+  pull_image: true
+  settings:
+    context: printer
+    dockerfile: printer/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/printer
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/unbound
+  pull_image: true
+  settings:
+    context: unbound
+    dockerfile: unbound/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/unbound
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/nsd
+  pull_image: true
+  settings:
+    context: nsd
+    dockerfile: nsd/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/nsd
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/syslog
+  pull_image: true
+  settings:
+    context: syslog
+    dockerfile: syslog/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/syslog
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/chrony
+  pull_image: true
+  settings:
+    context: chrony
+    dockerfile: chrony/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/chrony
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/dhcp-kea
+  pull_image: true
+  settings:
+    context: dhcp-kea
+    dockerfile: dhcp-kea/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/dhcp-kea
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/postfix
+  pull_image: true
+  settings:
+    context: postfix
+    dockerfile: postfix/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/postfix
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/dovecot
+  pull_image: true
+  settings:
+    context: dovecot
+    dockerfile: dovecot/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/dovecot
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/shell
+  pull_image: true
+  settings:
+    context: shell
+    dockerfile: shell/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/shell
+    username:
+      from_secret: DOCKER_USERNAME
+trigger:
+  ref:
+  - refs/heads/main
+  - refs/tags/v*
+---
+depends_on: []
+kind: pipeline
+name: docker-amd64
+platform:
+  arch: amd64
+  os: linux
+steps:
+- image: plugins/docker
+  name: docker-zachfi/printer
+  pull_image: true
+  settings:
+    context: printer
+    dockerfile: printer/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/printer
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/unbound
+  pull_image: true
+  settings:
+    context: unbound
+    dockerfile: unbound/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/unbound
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/nsd
+  pull_image: true
+  settings:
+    context: nsd
+    dockerfile: nsd/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/nsd
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/syslog
+  pull_image: true
+  settings:
+    context: syslog
+    dockerfile: syslog/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/syslog
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/chrony
+  pull_image: true
+  settings:
+    context: chrony
+    dockerfile: chrony/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/chrony
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/dhcp-kea
+  pull_image: true
+  settings:
+    context: dhcp-kea
+    dockerfile: dhcp-kea/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/dhcp-kea
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/postfix
+  pull_image: true
+  settings:
+    context: postfix
+    dockerfile: postfix/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/postfix
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/dovecot
+  pull_image: true
+  settings:
+    context: dovecot
+    dockerfile: dovecot/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/dovecot
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/shell
+  pull_image: true
+  settings:
+    context: shell
+    dockerfile: shell/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/shell
+    username:
+      from_secret: DOCKER_USERNAME
+trigger:
+  ref:
+  - refs/heads/**
+---
+depends_on: []
+kind: pipeline
+name: docker-arm64
+platform:
+  arch: arm64
+  os: linux
+steps:
+- image: plugins/docker
+  name: docker-zachfi/printer
+  pull_image: true
+  settings:
+    context: printer
+    dockerfile: printer/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/printer
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/unbound
+  pull_image: true
+  settings:
+    context: unbound
+    dockerfile: unbound/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/unbound
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/nsd
+  pull_image: true
+  settings:
+    context: nsd
+    dockerfile: nsd/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/nsd
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/syslog
+  pull_image: true
+  settings:
+    context: syslog
+    dockerfile: syslog/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/syslog
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/chrony
+  pull_image: true
+  settings:
+    context: chrony
+    dockerfile: chrony/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/chrony
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/dhcp-kea
+  pull_image: true
+  settings:
+    context: dhcp-kea
+    dockerfile: dhcp-kea/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/dhcp-kea
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/postfix
+  pull_image: true
+  settings:
+    context: postfix
+    dockerfile: postfix/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/postfix
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/dovecot
+  pull_image: true
+  settings:
+    context: dovecot
+    dockerfile: dovecot/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/dovecot
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/shell
+  pull_image: true
+  settings:
+    context: shell
+    dockerfile: shell/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/shell
+    username:
+      from_secret: DOCKER_USERNAME
+trigger:
+  ref:
+  - refs/heads/**

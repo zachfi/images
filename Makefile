@@ -1,7 +1,7 @@
 #
 
 drone:
-	@drone jsonnet --format
+	@drone jsonnet --stream --format
 	@drone lint
 
 modules:
