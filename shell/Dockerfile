@@ -9,5 +9,5 @@ RUN useradd --system --create-home $user \
 USER $user
 WORKDIR /home/$user
 COPY entrypoint.sh /bin/entrypoint.sh
-RUN chmod 0755 /bin/entrypoint.sh
+RUN sudo chmod 0755 /bin/entrypoint.sh
 ENTRYPOINT [ "/bin/entrypoint.sh" ]
