@@ -7,7 +7,7 @@ ARG user=makepkg
 RUN useradd --system --create-home $user \
   && echo "$user ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$user
 USER $user
-WORKDIR /home/$user
+WORKDIR /work
 COPY entrypoint.sh /bin/entrypoint.sh
 RUN sudo chmod 0755 /bin/entrypoint.sh
 ENTRYPOINT [ "/bin/entrypoint.sh" ]
