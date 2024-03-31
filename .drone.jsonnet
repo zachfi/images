@@ -26,6 +26,12 @@ local pipeline(name, arch='amd64') = {
       'refs/heads/main',
       'refs/tags/v*',
     ],
+    event: [
+      'cron',
+    ],
+    cron: {
+      include: ['weekly'],
+    },
   },
 };
 
