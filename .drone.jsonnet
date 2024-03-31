@@ -65,7 +65,7 @@ local dockerImage(arch, name, dry=false) = {
 ]
 + [
   (
-    pipeline('docker-' + arch, arch) {
+    pipeline('build-' + arch, arch) {
       steps+: [
         dockerImage(arch, f, dry=true)
         for f in stdImages

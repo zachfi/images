@@ -233,7 +233,7 @@ trigger:
 ---
 depends_on: []
 kind: pipeline
-name: docker-amd64
+name: build-amd64
 platform:
   arch: amd64
   os: linux
@@ -343,7 +343,7 @@ trigger:
 ---
 depends_on: []
 kind: pipeline
-name: docker-arm64
+name: build-arm64
 platform:
   arch: arm64
   os: linux
