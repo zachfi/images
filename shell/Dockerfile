@@ -8,3 +8,5 @@ RUN useradd --system --create-home $user \
   && echo "$user ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$user
 USER $user
 WORKDIR /home/$user
+COPY entrypoint.sh /bin/entrypoint.sh
+ENTRYPOINT [ "/bin/entrypoint.sh" ]
