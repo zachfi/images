@@ -328,8 +328,8 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 trigger:
-  ref:
-  - refs/heads/**
+  event:
+  - push
 ---
 depends_on: []
 kind: pipeline
@@ -438,5 +438,5 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 trigger:
-  ref:
-  - refs/heads/**
+  event:
+  - push

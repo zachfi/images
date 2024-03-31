@@ -65,8 +65,8 @@ local dockerImage(arch, name, dry=false) = {
         for f in stdImages
       ],
       trigger: {
-        ref: [
-          'refs/heads/**',
+        event: [
+          'push',
         ],
       },
     }
