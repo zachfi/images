@@ -106,11 +106,6 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 trigger:
-  cron:
-    include:
-    - weekly
-  event:
-  - cron
   ref:
   - refs/heads/main
   - refs/tags/v*
@@ -222,11 +217,6 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 trigger:
-  cron:
-    include:
-    - weekly
-  event:
-  - cron
   ref:
   - refs/heads/main
   - refs/tags/v*
