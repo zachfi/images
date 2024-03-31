@@ -66,6 +66,7 @@ local dockerBuild(name, dry=false, platform='linux/amd64,linux/arm64') = {
     trigger: {
       event: [
         'push',
+        'pull_request',
       ],
     },
   },
