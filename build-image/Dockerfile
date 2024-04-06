@@ -4,7 +4,7 @@ LABEL maintainer="none"
 # RUN apk update && apk add make go buildah git shadow-subids findmnt util-linux rootlesskit buildkit buildctl docker
 RUN apk update && apk add make git util-linux bash docker kubectl
 
-RUN go install github.com/goreleaser/goreleaser@v1.24.0
+RUN go install github.com/goreleaser/goreleaser@v1.25.1
 
 # RUN echo nope:100000:65536 > /etc/subuid
 # RUN echo nope:100000:65536 > /etc/subgid
