@@ -4,51 +4,15 @@ kind: pipeline
 name: publish
 steps:
 - image: plugins/docker
-  name: docker-zachfi/printer
+  name: docker-zachfi/build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
-    context: printer
-    dockerfile: printer/Dockerfile
+    context: build-image
+    dockerfile: build-image/Dockerfile
     password:
       from_secret: DOCKER_PASSWORD
-    repo: zachfi/printer
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/unbound
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: unbound
-    dockerfile: unbound/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/unbound
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/nsd
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: nsd
-    dockerfile: nsd/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/nsd
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/syslog
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: syslog
-    dockerfile: syslog/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/syslog
+    repo: zachfi/build-image
     username:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
@@ -76,18 +40,6 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
-  name: docker-zachfi/postfix
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: postfix
-    dockerfile: postfix/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/postfix
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
   name: docker-zachfi/dovecot
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -100,6 +52,42 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
+  name: docker-zachfi/nsd
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: nsd
+    dockerfile: nsd/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/nsd
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/postfix
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: postfix
+    dockerfile: postfix/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/postfix
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/printer
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: printer
+    dockerfile: printer/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/printer
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
   name: docker-zachfi/shell
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -109,6 +97,30 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     repo: zachfi/shell
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/syslog
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: syslog
+    dockerfile: syslog/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/syslog
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/unbound
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: unbound
+    dockerfile: unbound/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/unbound
     username:
       from_secret: DOCKER_USERNAME
 trigger:
@@ -121,51 +133,15 @@ kind: pipeline
 name: build
 steps:
 - image: plugins/docker
-  name: docker-zachfi/printer
+  name: docker-zachfi/build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
-    context: printer
-    dockerfile: printer/Dockerfile
+    context: build-image
+    dockerfile: build-image/Dockerfile
     password:
       from_secret: DOCKER_PASSWORD
-    repo: zachfi/printer
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/unbound
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: unbound
-    dockerfile: unbound/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/unbound
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/nsd
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: nsd
-    dockerfile: nsd/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/nsd
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/syslog
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: syslog
-    dockerfile: syslog/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/syslog
+    repo: zachfi/build-image
     username:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
@@ -193,18 +169,6 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
-  name: docker-zachfi/postfix
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: postfix
-    dockerfile: postfix/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/postfix
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
   name: docker-zachfi/dovecot
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -217,6 +181,42 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
+  name: docker-zachfi/nsd
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: nsd
+    dockerfile: nsd/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/nsd
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/postfix
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: postfix
+    dockerfile: postfix/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/postfix
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/printer
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: printer
+    dockerfile: printer/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/printer
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
   name: docker-zachfi/shell
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -226,6 +226,30 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     repo: zachfi/shell
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/syslog
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: syslog
+    dockerfile: syslog/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/syslog
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/unbound
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: unbound
+    dockerfile: unbound/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/unbound
     username:
       from_secret: DOCKER_USERNAME
 trigger:

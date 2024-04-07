@@ -1,13 +1,14 @@
 local stdImages = [
-  'printer',
-  'unbound',
-  'nsd',
-  'syslog',
+  'build-image',
   'chrony',
   'dhcp-kea',
-  'postfix',
   'dovecot',
+  'nsd',
+  'postfix',
+  'printer',
   'shell',
+  'syslog',
+  'unbound',
 ];
 local archs = ['amd64', 'arm64'];
 local owner = 'zachfi';
