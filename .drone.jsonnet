@@ -2,6 +2,7 @@ local stdImages = [
   'build-image',
   'chrony',
   'dhcp-kea',
+  'distcc',
   'dovecot',
   'nsd',
   'postfix',

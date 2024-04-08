@@ -40,6 +40,18 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
+  name: docker-zachfi/distcc
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: distcc
+    dockerfile: distcc/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/distcc
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
   name: docker-zachfi/dovecot
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -166,6 +178,18 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     repo: zachfi/dhcp-kea
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/distcc
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: distcc
+    dockerfile: distcc/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/distcc
     username:
       from_secret: DOCKER_USERNAME
 - image: plugins/docker
