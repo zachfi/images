@@ -1,6 +1,6 @@
 FROM archlinux/archlinux:base-devel
 LABEL maintainer="none"
-RUN pacman -Syu --needed --noconfirm git neovim restic kubectl aarch64-linux-gnu-binutils aarch64-linux-gnu-gcc arm-none-eabi-binutils arm-none-eabi-gcc devtools docker docker-buildx go pacman-contrib
+RUN pacman -Syu --needed --noconfirm git neovim restic kubectl aarch64-linux-gnu-gcc arm-none-eabi-gcc devtools docker docker-buildx go pacman-contrib
 COPY entrypoint.sh /bin/entrypoint.sh
 RUN chmod 0755 /bin/entrypoint.sh
 RUN paccache -rk0
