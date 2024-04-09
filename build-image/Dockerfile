@@ -2,7 +2,7 @@ FROM golang:1.22.0-alpine3.19
 LABEL maintainer="none"
 
 # RUN apk update && apk add make go buildah git shadow-subids findmnt util-linux rootlesskit buildkit buildctl docker
-RUN apk update && apk add make git util-linux bash docker kubectl
+RUN apk update && apk add make git util-linux bash docker kubectl openrc
 
 RUN go install github.com/goreleaser/goreleaser@v1.25.1
 
