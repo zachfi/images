@@ -256,3 +256,8 @@ trigger:
   event:
   - push
   - pull_request
+---
+kind: signature
+hmac: dc8bd3e0846b61536d1c7260b134d1d5186746f3a7cddaa5c977c25384007dd5
+
+...
