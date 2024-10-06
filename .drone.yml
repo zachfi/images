@@ -257,7 +257,136 @@ trigger:
   - push
   - pull_request
 ---
+depends_on:
+- publish
+kind: pipeline
+name: localpush
+steps:
+- image: plugins/docker
+  name: docker-zachfi/build-image
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: build-image
+    dockerfile: build-image/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/build-image
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/chrony
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: chrony
+    dockerfile: chrony/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/chrony
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/dhcp-kea
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: dhcp-kea
+    dockerfile: dhcp-kea/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/dhcp-kea
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/dovecot
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: dovecot
+    dockerfile: dovecot/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/dovecot
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/nsd
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: nsd
+    dockerfile: nsd/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/nsd
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/postfix
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: postfix
+    dockerfile: postfix/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/postfix
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/printer
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: printer
+    dockerfile: printer/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/printer
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/shell
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: shell
+    dockerfile: shell/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/shell
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/syslog
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: syslog
+    dockerfile: syslog/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/syslog
+    username:
+      from_secret: DOCKER_USERNAME
+- image: plugins/docker
+  name: docker-zachfi/unbound
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: unbound
+    dockerfile: unbound/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/unbound
+    username:
+      from_secret: DOCKER_USERNAME
+trigger:
+  branch:
+  - main
+---
 kind: signature
-hmac: a62d1b90ac1a46fb9c5557e4376382ec5bd12e6206d9ed181ea7029309bd7ccb
+hmac: 31e405e56511b3ef597c43d49f5eb72520ccf1a7ffe1adb72f5af8e4db7d4e47
 
 ...
