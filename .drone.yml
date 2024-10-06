@@ -1,7 +1,7 @@
 ---
 depends_on: []
 kind: pipeline
-name: publish
+name: build
 steps:
 - image: plugins/docker
   name: docker-zachfi/build-image
@@ -130,7 +130,7 @@ trigger:
 ---
 depends_on: []
 kind: pipeline
-name: build
+name: pr
 steps:
 - image: plugins/docker
   name: docker-zachfi/build-image
@@ -261,135 +261,75 @@ trigger:
   - pull_request
 ---
 depends_on:
-- publish
+- build
 kind: pipeline
 name: localpush
 steps:
-- image: plugins/docker
-  name: docker-zachfi/build-image
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: build-image
-    dockerfile: build-image/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/build-image
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/chrony
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: chrony
-    dockerfile: chrony/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/chrony
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/dhcp-kea
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: dhcp-kea
-    dockerfile: dhcp-kea/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/dhcp-kea
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/dovecot
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: dovecot
-    dockerfile: dovecot/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/dovecot
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/nsd
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: nsd
-    dockerfile: nsd/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/nsd
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/postfix
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: postfix
-    dockerfile: postfix/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/postfix
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/printer
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: printer
-    dockerfile: printer/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/printer
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/shell
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: shell
-    dockerfile: shell/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/shell
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/syslog
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: syslog
-    dockerfile: syslog/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/syslog
-    username:
-      from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: docker-zachfi/unbound
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    context: unbound
-    dockerfile: unbound/Dockerfile
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: zachfi/unbound
-    username:
-      from_secret: DOCKER_USERNAME
+- commands:
+  - docker tag zachfi/build-image:latest $(localRegistry)s:5000/zachfi/build-image:latest
+  - docker push $(localRegistry)s:5000/zachfi/build-image:latest
+  image: zachfi/build-image
+  name: build-image
+  pull: always
+- commands:
+  - docker tag zachfi/chrony:latest $(localRegistry)s:5000/zachfi/chrony:latest
+  - docker push $(localRegistry)s:5000/zachfi/chrony:latest
+  image: zachfi/build-image
+  name: chrony
+  pull: always
+- commands:
+  - docker tag zachfi/dhcp-kea:latest $(localRegistry)s:5000/zachfi/dhcp-kea:latest
+  - docker push $(localRegistry)s:5000/zachfi/dhcp-kea:latest
+  image: zachfi/build-image
+  name: dhcp-kea
+  pull: always
+- commands:
+  - docker tag zachfi/dovecot:latest $(localRegistry)s:5000/zachfi/dovecot:latest
+  - docker push $(localRegistry)s:5000/zachfi/dovecot:latest
+  image: zachfi/build-image
+  name: dovecot
+  pull: always
+- commands:
+  - docker tag zachfi/nsd:latest $(localRegistry)s:5000/zachfi/nsd:latest
+  - docker push $(localRegistry)s:5000/zachfi/nsd:latest
+  image: zachfi/build-image
+  name: nsd
+  pull: always
+- commands:
+  - docker tag zachfi/postfix:latest $(localRegistry)s:5000/zachfi/postfix:latest
+  - docker push $(localRegistry)s:5000/zachfi/postfix:latest
+  image: zachfi/build-image
+  name: postfix
+  pull: always
+- commands:
+  - docker tag zachfi/printer:latest $(localRegistry)s:5000/zachfi/printer:latest
+  - docker push $(localRegistry)s:5000/zachfi/printer:latest
+  image: zachfi/build-image
+  name: printer
+  pull: always
+- commands:
+  - docker tag zachfi/shell:latest $(localRegistry)s:5000/zachfi/shell:latest
+  - docker push $(localRegistry)s:5000/zachfi/shell:latest
+  image: zachfi/build-image
+  name: shell
+  pull: always
+- commands:
+  - docker tag zachfi/syslog:latest $(localRegistry)s:5000/zachfi/syslog:latest
+  - docker push $(localRegistry)s:5000/zachfi/syslog:latest
+  image: zachfi/build-image
+  name: syslog
+  pull: always
+- commands:
+  - docker tag zachfi/unbound:latest $(localRegistry)s:5000/zachfi/unbound:latest
+  - docker push $(localRegistry)s:5000/zachfi/unbound:latest
+  image: zachfi/build-image
+  name: unbound
+  pull: always
 trigger:
   branch:
   - main
 ---
 kind: signature
-hmac: c3846c0fb8bd9b7e4b418dbc918d84a94606c9e606a786514ae50f83649d3f25
+hmac: 9195b343493e73ad37173aaecb32cbb75bcf62fa0a29c02e115c167aed66bac5
 
 ...

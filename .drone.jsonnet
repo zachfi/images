@@ -73,7 +73,7 @@ local localPush(target, tag='latest') = step(target) {
 
 [
   (
-    pipeline('publish') {
+    pipeline('build') {
       steps+: [
         dockerBuild(f)
         for f in stdImages
@@ -81,7 +81,7 @@ local localPush(target, tag='latest') = step(target) {
     }
   ),
   (
-    pipeline('build') {
+    pipeline('pr') {
       steps+: [
         dockerBuild(f, dry=true)
         for f in stdImages
@@ -98,9 +98,9 @@ local localPush(target, tag='latest') = step(target) {
     }
   ),
   (
-    pipeline('localpush', depends_on=['publish']) {
+    pipeline('localpush', depends_on=['build']) {
       steps+: [
-        dockerBuild(f, dry=true)
+        localPush(f)
         for f in stdImages
       ],
       trigger: {
