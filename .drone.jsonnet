@@ -13,7 +13,7 @@ local stdImages = [
 ];
 local archs = ['amd64', 'arm64'];
 local owner = 'zachfi';
-local localRegistry = 'reg.dist.svc.cluster.znet:5000/%s' % owner;
+local localRegistry = 'reg.dist.svc.cluster.znet:5000';
 
 local pipeline(name, depends_on=[]) = {
   kind: 'pipeline',
@@ -68,8 +68,8 @@ local make(target) = step(target) {
 local localPush(target, tag='latest') = step(target) {
   local image = '%(owner)s/%(target)s:%(tag)s' % { owner: owner, target: target, tag: tag },
   commands: [
-    'docker tag %(image)s %(localRegistry)s:5000/%(image)s' % { image: image, localRegistry: localRegistry },
-    'docker push %(localRegistry)s:5000/%(image)s' % { image: image, localRegistry: localRegistry },
+    'docker tag %(image)s %(localRegistry)s/%(image)s' % { image: image, localRegistry: localRegistry },
+    'docker push %(localRegistry)s/%(image)s' % { image: image, localRegistry: localRegistry },
   ],
 };
 
