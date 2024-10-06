@@ -68,8 +68,8 @@ local make(target) = step(target) {
 local localPush(target, tag='latest') = step(target) {
   local image = '%(owner)s/%(target)s:%(tag)s' % { owner: owner, target: target, tag: tag },
   commands: [
-    'docker tag %(image)s $(localRegistry)s:5000/%(image)s' % { image: image, localRegistry: localRegistry },
-    'docker push $(localRegistry)s:5000/%(image)s' % { image: image, localRegistry: localRegistry },
+    'docker tag %(image)s %(localRegistry)s:5000/%(image)s' % { image: image, localRegistry: localRegistry },
+    'docker push %(localRegistry)s:5000/%(image)s' % { image: image, localRegistry: localRegistry },
   ],
 };
 
