@@ -87,6 +87,9 @@ local localPush(target, tag='latest') = step(target) {
         for f in stdImages
       ],
       trigger: {
+        branch: {
+          exclude: ['main'],
+        },
         event: [
           'push',
           'pull_request',

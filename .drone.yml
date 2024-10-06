@@ -253,6 +253,9 @@ steps:
     username:
       from_secret: DOCKER_USERNAME
 trigger:
+  branch:
+    exclude:
+    - main
   event:
   - push
   - pull_request
@@ -387,6 +390,6 @@ trigger:
   - main
 ---
 kind: signature
-hmac: 31e405e56511b3ef597c43d49f5eb72520ccf1a7ffe1adb72f5af8e4db7d4e47
+hmac: c3846c0fb8bd9b7e4b418dbc918d84a94606c9e606a786514ae50f83649d3f25
 
 ...
