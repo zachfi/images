@@ -1,4 +1,5 @@
 local stdImages = [
+  'aur-build-image',
   'build-image',
   'chrony',
   'dhcp-kea',

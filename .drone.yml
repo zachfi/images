@@ -5,6 +5,19 @@ name: build
 steps:
 - dry_run: false
   image: plugins/docker
+  name: docker-zachfi/aur-build-image
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: aur-build-image
+    dockerfile: aur-build-image/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/aur-build-image
+    username:
+      from_secret: DOCKER_USERNAME
+- dry_run: false
+  image: plugins/docker
   name: docker-zachfi/build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -142,6 +155,19 @@ depends_on: []
 kind: pipeline
 name: pr
 steps:
+- dry_run: true
+  image: plugins/docker
+  name: docker-zachfi/aur-build-image
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    context: aur-build-image
+    dockerfile: aur-build-image/Dockerfile
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: zachfi/aur-build-image
+    username:
+      from_secret: DOCKER_USERNAME
 - dry_run: true
   image: plugins/docker
   name: docker-zachfi/build-image
@@ -286,6 +312,12 @@ kind: pipeline
 name: localpush
 steps:
 - commands:
+  - docker tag zachfi/aur-build-image:latest $(localRegistry)s:5000/zachfi/aur-build-image:latest
+  - docker push $(localRegistry)s:5000/zachfi/aur-build-image:latest
+  image: zachfi/build-image
+  name: aur-build-image
+  pull: always
+- commands:
   - docker tag zachfi/build-image:latest $(localRegistry)s:5000/zachfi/build-image:latest
   - docker push $(localRegistry)s:5000/zachfi/build-image:latest
   image: zachfi/build-image
@@ -350,6 +382,6 @@ trigger:
   - main
 ---
 kind: signature
-hmac: bbf1f174f7d569680c8f4a18367fcb377583e2d7ea1c8fe72f37cc2e8a88e380
+hmac: 5e1f9207057e3c37eb55e68d114ce1a5aea4e9e9ff4035b3e9ac3a4bbb52c74d
 
 ...
