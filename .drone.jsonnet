@@ -38,6 +38,7 @@ local dockerBuild(name, dry=false, platform='linux/amd64,linux/arm64') = {
   image: 'plugins/docker',
   pull_image: true,
   platform: platform,
+  dry_run: dry,
   settings: {
     dockerfile: '%s/Dockerfile' % name,
     context: name,
