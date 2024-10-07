@@ -38,12 +38,13 @@ local pipeline(name, depends_on=[]) = {
   ],
 };
 
-local dockerBuild(name, dry=false, platform='linux/amd64,linux/arm64') = {
+local dockerBuild(name, dry=false, platform='linux/amd64,linux/arm64', purge=false) = {
   name: 'docker-%s/%s' % [owner, name],
   image: 'plugins/docker',
   pull_image: true,
   platform: platform,
   dry_run: dry,
+  purge: purge,
   settings: {
     dockerfile: '%s/Dockerfile' % name,
     context: name,
@@ -80,6 +81,18 @@ local localPush(target, tag='latest') = step(target) {
   ],
 };
 
+
+local cleanup() = {
+  name: 'cleanup',
+  image: 'zachfi/build-image',
+  pull: 'always',
+  volumes+: [
+    { name: 'dockersock', path: '/var/run/docker.sock' },
+  ],
+  commands: [
+    '/usr/local/bin/docker system prune -f',
+  ],
+};
 [
   (
     pipeline('build') {
@@ -92,7 +105,7 @@ local localPush(target, tag='latest') = step(target) {
   (
     pipeline('pr') {
       steps+: [
-        dockerBuild(f, dry=true)
+        dockerBuild(f, dry=true, purge=true)
         for f in stdImages
       ],
       trigger: {
@@ -111,6 +124,18 @@ local localPush(target, tag='latest') = step(target) {
       steps+: [
         localPush(f)
         for f in stdImages
+      ],
+      trigger: {
+        branch: [
+          'main',
+        ],
+      },
+    }
+  ),
+  (
+    pipeline('cleanup', depends_on=['localpush']) {
+      steps+: [
+        cleanup(),
       ],
       trigger: {
         branch: [

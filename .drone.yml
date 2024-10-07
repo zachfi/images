@@ -8,6 +8,7 @@ steps:
   name: docker-zachfi/aur-build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: false
   settings:
     context: aur-build-image
     dockerfile: aur-build-image/Dockerfile
@@ -21,6 +22,7 @@ steps:
   name: docker-zachfi/build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: false
   settings:
     context: build-image
     dockerfile: build-image/Dockerfile
@@ -34,6 +36,7 @@ steps:
   name: docker-zachfi/chrony
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: false
   settings:
     context: chrony
     dockerfile: chrony/Dockerfile
@@ -47,6 +50,7 @@ steps:
   name: docker-zachfi/dhcp-kea
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: false
   settings:
     context: dhcp-kea
     dockerfile: dhcp-kea/Dockerfile
@@ -60,6 +64,7 @@ steps:
   name: docker-zachfi/dovecot
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: false
   settings:
     context: dovecot
     dockerfile: dovecot/Dockerfile
@@ -73,6 +78,7 @@ steps:
   name: docker-zachfi/nsd
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: false
   settings:
     context: nsd
     dockerfile: nsd/Dockerfile
@@ -86,6 +92,7 @@ steps:
   name: docker-zachfi/postfix
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: false
   settings:
     context: postfix
     dockerfile: postfix/Dockerfile
@@ -99,6 +106,7 @@ steps:
   name: docker-zachfi/printer
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: false
   settings:
     context: printer
     dockerfile: printer/Dockerfile
@@ -112,6 +120,7 @@ steps:
   name: docker-zachfi/shell
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: false
   settings:
     context: shell
     dockerfile: shell/Dockerfile
@@ -125,6 +134,7 @@ steps:
   name: docker-zachfi/syslog
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: false
   settings:
     context: syslog
     dockerfile: syslog/Dockerfile
@@ -138,6 +148,7 @@ steps:
   name: docker-zachfi/unbound
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: false
   settings:
     context: unbound
     dockerfile: unbound/Dockerfile
@@ -164,6 +175,7 @@ steps:
   name: docker-zachfi/aur-build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: true
   settings:
     context: aur-build-image
     dockerfile: aur-build-image/Dockerfile
@@ -177,6 +189,7 @@ steps:
   name: docker-zachfi/build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: true
   settings:
     context: build-image
     dockerfile: build-image/Dockerfile
@@ -190,6 +203,7 @@ steps:
   name: docker-zachfi/chrony
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: true
   settings:
     context: chrony
     dockerfile: chrony/Dockerfile
@@ -203,6 +217,7 @@ steps:
   name: docker-zachfi/dhcp-kea
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: true
   settings:
     context: dhcp-kea
     dockerfile: dhcp-kea/Dockerfile
@@ -216,6 +231,7 @@ steps:
   name: docker-zachfi/dovecot
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: true
   settings:
     context: dovecot
     dockerfile: dovecot/Dockerfile
@@ -229,6 +245,7 @@ steps:
   name: docker-zachfi/nsd
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: true
   settings:
     context: nsd
     dockerfile: nsd/Dockerfile
@@ -242,6 +259,7 @@ steps:
   name: docker-zachfi/postfix
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: true
   settings:
     context: postfix
     dockerfile: postfix/Dockerfile
@@ -255,6 +273,7 @@ steps:
   name: docker-zachfi/printer
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: true
   settings:
     context: printer
     dockerfile: printer/Dockerfile
@@ -268,6 +287,7 @@ steps:
   name: docker-zachfi/shell
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: true
   settings:
     context: shell
     dockerfile: shell/Dockerfile
@@ -281,6 +301,7 @@ steps:
   name: docker-zachfi/syslog
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: true
   settings:
     context: syslog
     dockerfile: syslog/Dockerfile
@@ -294,6 +315,7 @@ steps:
   name: docker-zachfi/unbound
   platform: linux/amd64,linux/arm64
   pull_image: true
+  purge: true
   settings:
     context: unbound
     dockerfile: unbound/Dockerfile
@@ -426,7 +448,28 @@ volumes:
     path: /var/run/docker.sock
   name: dockersock
 ---
+depends_on:
+- localpush
+kind: pipeline
+name: cleanup
+steps:
+- commands:
+  - /usr/local/bin/docker system prune -f
+  image: zachfi/build-image
+  name: cleanup
+  pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+trigger:
+  branch:
+  - main
+volumes:
+- host:
+    path: /var/run/docker.sock
+  name: dockersock
+---
 kind: signature
-hmac: 5b7210974dfe2ee40cea8894947bbc71641613d394d3e0aa22a00b39e63cda27
+hmac: 47123c202d8a7fe6cb0e6b0c23955afb76366d0015a02c696eff545258d0055e
 
 ...
