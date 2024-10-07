@@ -150,6 +150,10 @@ trigger:
   ref:
   - refs/heads/main
   - refs/tags/v*
+volumes:
+- host:
+    path: /var/run/docker.sock
+  name: dockersock
 ---
 depends_on: []
 kind: pipeline
@@ -305,6 +309,10 @@ trigger:
   event:
   - push
   - pull_request
+volumes:
+- host:
+    path: /var/run/docker.sock
+  name: dockersock
 ---
 depends_on:
 - build
@@ -317,71 +325,108 @@ steps:
   image: zachfi/build-image
   name: aur-build-image
   pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/build-image:latest reg.dist.svc.cluster.znet:5000/zachfi/build-image:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/build-image:latest
   image: zachfi/build-image
   name: build-image
   pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/chrony:latest reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
   image: zachfi/build-image
   name: chrony
   pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/dhcp-kea:latest reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea:latest
   image: zachfi/build-image
   name: dhcp-kea
   pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/dovecot:latest reg.dist.svc.cluster.znet:5000/zachfi/dovecot:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/dovecot:latest
   image: zachfi/build-image
   name: dovecot
   pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/nsd:latest reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
   image: zachfi/build-image
   name: nsd
   pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/postfix:latest reg.dist.svc.cluster.znet:5000/zachfi/postfix:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/postfix:latest
   image: zachfi/build-image
   name: postfix
   pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/printer:latest reg.dist.svc.cluster.znet:5000/zachfi/printer:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/printer:latest
   image: zachfi/build-image
   name: printer
   pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/shell:latest reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
   image: zachfi/build-image
   name: shell
   pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/syslog:latest reg.dist.svc.cluster.znet:5000/zachfi/syslog:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/syslog:latest
   image: zachfi/build-image
   name: syslog
   pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/unbound:latest reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
   image: zachfi/build-image
   name: unbound
   pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
 trigger:
   branch:
   - main
+volumes:
+- host:
+    path: /var/run/docker.sock
+  name: dockersock
 ---
 kind: signature
-hmac: c15d3a851dcc917942e848fdb9c05a71e1f681923122da77b973861fcce88ff7
+hmac: 5b7210974dfe2ee40cea8894947bbc71641613d394d3e0aa22a00b39e63cda27
 
 ...

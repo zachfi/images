@@ -32,6 +32,10 @@ local pipeline(name, depends_on=[]) = {
     //   include: ['weekly'],
     // },
   },
+  volumes: [
+    // { name: 'cache', temp: {} },
+    { name: 'dockersock', host: { path: '/var/run/docker.sock' } },
+  ],
 };
 
 local dockerBuild(name, dry=false, platform='linux/amd64,linux/arm64') = {
@@ -58,6 +62,9 @@ local step(name) = {
   image: 'zachfi/build-image',
   pull: 'always',
   commands: [],
+  volumes+: [
+    { name: 'dockersock', path: '/var/run/docker.sock' },
+  ],
 };
 
 local make(target) = step(target) {
