@@ -74,6 +74,7 @@ local localBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm64
     registry: localRegistry,
     insecure: true,
     ipv6: true,
+    daemon_off: true,
   },
 };
 

@@ -10,6 +10,7 @@ steps:
   settings:
     compress: true
     context: aur-build-image
+    daemon_off: true
     dockerfile: aur-build-image/Dockerfile
     dry_run: false
     insecure: true
@@ -24,6 +25,7 @@ steps:
   settings:
     compress: true
     context: build-image
+    daemon_off: true
     dockerfile: build-image/Dockerfile
     dry_run: false
     insecure: true
@@ -38,6 +40,7 @@ steps:
   settings:
     compress: true
     context: chrony
+    daemon_off: true
     dockerfile: chrony/Dockerfile
     dry_run: false
     insecure: true
@@ -52,6 +55,7 @@ steps:
   settings:
     compress: true
     context: dhcp-kea
+    daemon_off: true
     dockerfile: dhcp-kea/Dockerfile
     dry_run: false
     insecure: true
@@ -66,6 +70,7 @@ steps:
   settings:
     compress: true
     context: dovecot
+    daemon_off: true
     dockerfile: dovecot/Dockerfile
     dry_run: false
     insecure: true
@@ -80,6 +85,7 @@ steps:
   settings:
     compress: true
     context: nsd
+    daemon_off: true
     dockerfile: nsd/Dockerfile
     dry_run: false
     insecure: true
@@ -94,6 +100,7 @@ steps:
   settings:
     compress: true
     context: postfix
+    daemon_off: true
     dockerfile: postfix/Dockerfile
     dry_run: false
     insecure: true
@@ -108,6 +115,7 @@ steps:
   settings:
     compress: true
     context: printer
+    daemon_off: true
     dockerfile: printer/Dockerfile
     dry_run: false
     insecure: true
@@ -122,6 +130,7 @@ steps:
   settings:
     compress: true
     context: shell
+    daemon_off: true
     dockerfile: shell/Dockerfile
     dry_run: false
     insecure: true
@@ -136,6 +145,7 @@ steps:
   settings:
     compress: true
     context: syslog
+    daemon_off: true
     dockerfile: syslog/Dockerfile
     dry_run: false
     insecure: true
@@ -150,6 +160,7 @@ steps:
   settings:
     compress: true
     context: unbound
+    daemon_off: true
     dockerfile: unbound/Dockerfile
     dry_run: false
     insecure: true
@@ -534,6 +545,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 6e5f880889d7a913683aef1033112971f2ac362bdaa2211867f1ef748d38bfd1
+hmac: 25514df6523a9cc7d1241c22d9b6d09cd5fbe1d598fde2217b0bba923a4eeac3
 
 ...
