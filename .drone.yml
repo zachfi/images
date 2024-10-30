@@ -15,7 +15,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/aur-build-image
     username:
       from_secret: DOCKER_USERNAME
@@ -31,7 +30,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/build-image
     username:
       from_secret: DOCKER_USERNAME
@@ -47,7 +45,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/chrony
     username:
       from_secret: DOCKER_USERNAME
@@ -63,7 +60,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/dhcp-kea
     username:
       from_secret: DOCKER_USERNAME
@@ -79,7 +75,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/dovecot
     username:
       from_secret: DOCKER_USERNAME
@@ -95,7 +90,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/nsd
     username:
       from_secret: DOCKER_USERNAME
@@ -111,7 +105,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/postfix
     username:
       from_secret: DOCKER_USERNAME
@@ -127,7 +120,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/printer
     username:
       from_secret: DOCKER_USERNAME
@@ -143,7 +135,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/shell
     username:
       from_secret: DOCKER_USERNAME
@@ -159,7 +150,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/syslog
     username:
       from_secret: DOCKER_USERNAME
@@ -175,7 +165,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/unbound
     username:
       from_secret: DOCKER_USERNAME
@@ -204,7 +193,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/aur-build-image
     username:
       from_secret: DOCKER_USERNAME
@@ -220,7 +208,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/build-image
     username:
       from_secret: DOCKER_USERNAME
@@ -236,7 +223,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/chrony
     username:
       from_secret: DOCKER_USERNAME
@@ -252,7 +238,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/dhcp-kea
     username:
       from_secret: DOCKER_USERNAME
@@ -268,7 +253,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/dovecot
     username:
       from_secret: DOCKER_USERNAME
@@ -284,7 +268,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/nsd
     username:
       from_secret: DOCKER_USERNAME
@@ -300,7 +283,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/postfix
     username:
       from_secret: DOCKER_USERNAME
@@ -316,7 +298,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/printer
     username:
       from_secret: DOCKER_USERNAME
@@ -332,7 +313,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/shell
     username:
       from_secret: DOCKER_USERNAME
@@ -348,7 +328,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/syslog
     username:
       from_secret: DOCKER_USERNAME
@@ -364,7 +343,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
-    registry: reg.dist.svc.cluster.znet:5000
     repo: zachfi/unbound
     username:
       from_secret: DOCKER_USERNAME
@@ -514,6 +492,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 311b134518aefae625af8c38c52b57e6024e2862a963cf177cee658c62e6f170
+hmac: 6c4000e1234a2782962eb697ff41ef9f24f8f8b72d59d5242ba18181572cc3bf
 
 ...

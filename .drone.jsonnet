@@ -55,7 +55,6 @@ local dockerBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm6
     password: {
       from_secret: 'DOCKER_PASSWORD',
     },
-    registry: localRegistry,
     repo: '%s/%s' % [owner, name],
   },
 };
