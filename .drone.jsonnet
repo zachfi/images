@@ -100,7 +100,7 @@ local step(name) = {
 local localPush(target, tag='latest') = step(target) {
   local image = '%(owner)s/%(target)s:%(tag)s' % { owner: owner, target: target, tag: tag },
   commands: [
-    'docker tag %(image)s %(localRegistry)s0/%(image)s' % { image: image, localRegistry: localRegistry },
+    'docker tag %(image)s %(localRegistry)s/%(image)s' % { image: image, localRegistry: localRegistry },
     'docker push %(localRegistry)s/%(image)s' % { image: image, localRegistry: localRegistry },
   ],
 };
