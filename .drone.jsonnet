@@ -73,7 +73,7 @@ local make(target) = step(target) {
   commands: ['make %s' % target],
 };
 
-local localPush(target, tag='latest') = step(target) {
+local localPush(target, tag='latest') = step('local-%s' % target) {
   local image = '%(owner)s/%(target)s:%(tag)s' % { owner: owner, target: target, tag: tag },
   commands: [
     'docker tag %(image)s %(localRegistry)s/%(image)s' % { image: image, localRegistry: localRegistry },
