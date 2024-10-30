@@ -96,21 +96,22 @@ local cleanup() = {
   (
     pipeline('build') {
       steps+: [
-        dockerBuild(f)
-        for f in stdImages
-      ],
-    }
-  ),
-  (
-    pipeline('pr') {
-      steps+: [
-                dockerBuild(f, dry=true, purge=true)
+                dockerBuild(f)
                 for f in stdImages
               ]
               + [
                 localPush(f)
                 for f in stdImages
-              ]
+              ],
+
+    }
+  ),
+  (
+    pipeline('pr') {
+      steps+: [
+        dockerBuild(f, dry=true, purge=true)
+        for f in stdImages
+      ]
       ,
       trigger: {
         branch: {
