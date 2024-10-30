@@ -105,11 +105,11 @@ local cleanup() = {
   (
     pipeline('build') {
       steps+: [
-                dockerBuild(f)
+                localBuild(f)
                 for f in stdImages
               ]
               + [
-                localBuild(f)
+                dockerBuild(f)
                 for f in stdImages
               ],
 
