@@ -475,7 +475,7 @@ name: localpush
 steps:
 - commands:
   - docker tag zachfi/aur-build-image:latest reg.dist.svc.cluster.znet:50000/zachfi/aur-build-image:latest
-  - docker push reg.dist.svc.cluster.znet:5000:5000/zachfi/aur-build-image:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image:latest
   image: zachfi/build-image
   name: aur-build-image
   pull: always
@@ -484,7 +484,7 @@ steps:
     path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/build-image:latest reg.dist.svc.cluster.znet:50000/zachfi/build-image:latest
-  - docker push reg.dist.svc.cluster.znet:5000:5000/zachfi/build-image:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/build-image:latest
   image: zachfi/build-image
   name: build-image
   pull: always
@@ -493,7 +493,7 @@ steps:
     path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/chrony:latest reg.dist.svc.cluster.znet:50000/zachfi/chrony:latest
-  - docker push reg.dist.svc.cluster.znet:5000:5000/zachfi/chrony:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
   image: zachfi/build-image
   name: chrony
   pull: always
@@ -502,7 +502,7 @@ steps:
     path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/dhcp-kea:latest reg.dist.svc.cluster.znet:50000/zachfi/dhcp-kea:latest
-  - docker push reg.dist.svc.cluster.znet:5000:5000/zachfi/dhcp-kea:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea:latest
   image: zachfi/build-image
   name: dhcp-kea
   pull: always
@@ -511,7 +511,7 @@ steps:
     path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/dovecot:latest reg.dist.svc.cluster.znet:50000/zachfi/dovecot:latest
-  - docker push reg.dist.svc.cluster.znet:5000:5000/zachfi/dovecot:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/dovecot:latest
   image: zachfi/build-image
   name: dovecot
   pull: always
@@ -520,7 +520,7 @@ steps:
     path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/nsd:latest reg.dist.svc.cluster.znet:50000/zachfi/nsd:latest
-  - docker push reg.dist.svc.cluster.znet:5000:5000/zachfi/nsd:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
   image: zachfi/build-image
   name: nsd
   pull: always
@@ -529,7 +529,7 @@ steps:
     path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/postfix:latest reg.dist.svc.cluster.znet:50000/zachfi/postfix:latest
-  - docker push reg.dist.svc.cluster.znet:5000:5000/zachfi/postfix:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/postfix:latest
   image: zachfi/build-image
   name: postfix
   pull: always
@@ -538,7 +538,7 @@ steps:
     path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/printer:latest reg.dist.svc.cluster.znet:50000/zachfi/printer:latest
-  - docker push reg.dist.svc.cluster.znet:5000:5000/zachfi/printer:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/printer:latest
   image: zachfi/build-image
   name: printer
   pull: always
@@ -547,7 +547,7 @@ steps:
     path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/shell:latest reg.dist.svc.cluster.znet:50000/zachfi/shell:latest
-  - docker push reg.dist.svc.cluster.znet:5000:5000/zachfi/shell:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
   image: zachfi/build-image
   name: shell
   pull: always
@@ -556,7 +556,7 @@ steps:
     path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/syslog:latest reg.dist.svc.cluster.znet:50000/zachfi/syslog:latest
-  - docker push reg.dist.svc.cluster.znet:5000:5000/zachfi/syslog:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/syslog:latest
   image: zachfi/build-image
   name: syslog
   pull: always
@@ -565,7 +565,7 @@ steps:
     path: /var/run/docker.sock
 - commands:
   - docker tag zachfi/unbound:latest reg.dist.svc.cluster.znet:50000/zachfi/unbound:latest
-  - docker push reg.dist.svc.cluster.znet:5000:5000/zachfi/unbound:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
   image: zachfi/build-image
   name: unbound
   pull: always
@@ -602,6 +602,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: ec31ec4b874ce299e191337bc2420748aec8136dc7b3ae8f6376021775444d97
+hmac: 432ac8ce6ae5b733b0df0d95314237ec9f52fe55385d4192507646ccaaceed9b
 
 ...
