@@ -70,7 +70,7 @@ local localBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm64
     compress: true,
     dockerfile: '%s/Dockerfile' % name,
     context: name,
-    repo: '%s/%s' % [owner, name],
+    repo: '%s/%s/%s' % [localRegistry, owner, name],
     registry: localRegistry,
     insecure: true,
   },

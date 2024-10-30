@@ -15,7 +15,7 @@ steps:
     insecure: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/aur-build-image
+    repo: reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image
 - image: plugins/docker
   name: local-zachfi/build-image
   platform: linux/amd64,linux/arm64
@@ -28,7 +28,7 @@ steps:
     insecure: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/build-image
+    repo: reg.dist.svc.cluster.znet:5000/zachfi/build-image
 - image: plugins/docker
   name: local-zachfi/chrony
   platform: linux/amd64,linux/arm64
@@ -41,7 +41,7 @@ steps:
     insecure: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/chrony
+    repo: reg.dist.svc.cluster.znet:5000/zachfi/chrony
 - image: plugins/docker
   name: local-zachfi/dhcp-kea
   platform: linux/amd64,linux/arm64
@@ -54,7 +54,7 @@ steps:
     insecure: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/dhcp-kea
+    repo: reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea
 - image: plugins/docker
   name: local-zachfi/dovecot
   platform: linux/amd64,linux/arm64
@@ -67,7 +67,7 @@ steps:
     insecure: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/dovecot
+    repo: reg.dist.svc.cluster.znet:5000/zachfi/dovecot
 - image: plugins/docker
   name: local-zachfi/nsd
   platform: linux/amd64,linux/arm64
@@ -80,7 +80,7 @@ steps:
     insecure: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/nsd
+    repo: reg.dist.svc.cluster.znet:5000/zachfi/nsd
 - image: plugins/docker
   name: local-zachfi/postfix
   platform: linux/amd64,linux/arm64
@@ -93,7 +93,7 @@ steps:
     insecure: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/postfix
+    repo: reg.dist.svc.cluster.znet:5000/zachfi/postfix
 - image: plugins/docker
   name: local-zachfi/printer
   platform: linux/amd64,linux/arm64
@@ -106,7 +106,7 @@ steps:
     insecure: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/printer
+    repo: reg.dist.svc.cluster.znet:5000/zachfi/printer
 - image: plugins/docker
   name: local-zachfi/shell
   platform: linux/amd64,linux/arm64
@@ -119,7 +119,7 @@ steps:
     insecure: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/shell
+    repo: reg.dist.svc.cluster.znet:5000/zachfi/shell
 - image: plugins/docker
   name: local-zachfi/syslog
   platform: linux/amd64,linux/arm64
@@ -132,7 +132,7 @@ steps:
     insecure: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/syslog
+    repo: reg.dist.svc.cluster.znet:5000/zachfi/syslog
 - image: plugins/docker
   name: local-zachfi/unbound
   platform: linux/amd64,linux/arm64
@@ -145,7 +145,7 @@ steps:
     insecure: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/unbound
+    repo: reg.dist.svc.cluster.znet:5000/zachfi/unbound
 - image: plugins/docker
   name: docker-zachfi/aur-build-image
   platform: linux/amd64,linux/arm64
@@ -523,6 +523,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 7686d475a254e8c9fee807a7c445c20eb3b96bffe14af6610c8c61da20d1ac34
+hmac: f604a25f0bcd0be155562af77899d245949f3bbbbe927d15a761c809eac3df2c
 
 ...
