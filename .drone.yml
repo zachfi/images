@@ -6,6 +6,7 @@ steps:
 - image: plugins/docker
   name: local-zachfi/aur-build-image
   platform: linux/amd64,linux/arm64
+  privileged: true
   pull_image: true
   settings:
     compress: true
@@ -21,6 +22,7 @@ steps:
 - image: plugins/docker
   name: local-zachfi/build-image
   platform: linux/amd64,linux/arm64
+  privileged: true
   pull_image: true
   settings:
     compress: true
@@ -36,6 +38,7 @@ steps:
 - image: plugins/docker
   name: local-zachfi/chrony
   platform: linux/amd64,linux/arm64
+  privileged: true
   pull_image: true
   settings:
     compress: true
@@ -51,6 +54,7 @@ steps:
 - image: plugins/docker
   name: local-zachfi/dhcp-kea
   platform: linux/amd64,linux/arm64
+  privileged: true
   pull_image: true
   settings:
     compress: true
@@ -66,6 +70,7 @@ steps:
 - image: plugins/docker
   name: local-zachfi/dovecot
   platform: linux/amd64,linux/arm64
+  privileged: true
   pull_image: true
   settings:
     compress: true
@@ -81,6 +86,7 @@ steps:
 - image: plugins/docker
   name: local-zachfi/nsd
   platform: linux/amd64,linux/arm64
+  privileged: true
   pull_image: true
   settings:
     compress: true
@@ -96,6 +102,7 @@ steps:
 - image: plugins/docker
   name: local-zachfi/postfix
   platform: linux/amd64,linux/arm64
+  privileged: true
   pull_image: true
   settings:
     compress: true
@@ -111,6 +118,7 @@ steps:
 - image: plugins/docker
   name: local-zachfi/printer
   platform: linux/amd64,linux/arm64
+  privileged: true
   pull_image: true
   settings:
     compress: true
@@ -126,6 +134,7 @@ steps:
 - image: plugins/docker
   name: local-zachfi/shell
   platform: linux/amd64,linux/arm64
+  privileged: true
   pull_image: true
   settings:
     compress: true
@@ -141,6 +150,7 @@ steps:
 - image: plugins/docker
   name: local-zachfi/syslog
   platform: linux/amd64,linux/arm64
+  privileged: true
   pull_image: true
   settings:
     compress: true
@@ -156,6 +166,7 @@ steps:
 - image: plugins/docker
   name: local-zachfi/unbound
   platform: linux/amd64,linux/arm64
+  privileged: true
   pull_image: true
   settings:
     compress: true
@@ -545,6 +556,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 25514df6523a9cc7d1241c22d9b6d09cd5fbe1d598fde2217b0bba923a4eeac3
+hmac: fbf16fb78eafbaa6320cb1fb1414e69ca44de30a5c36741da8785539ca348205
 
 ...

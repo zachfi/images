@@ -63,6 +63,7 @@ local localBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm64
   name: 'local-%s/%s' % [owner, name],
   image: 'plugins/docker',
   pull_image: true,
+  privileged: true,
   platform: platform,
   settings: {
     dry_run: dry,
