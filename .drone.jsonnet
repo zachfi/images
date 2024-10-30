@@ -73,6 +73,7 @@ local localBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm64
     repo: '%s/%s/%s' % [localRegistry, owner, name],
     registry: localRegistry,
     insecure: true,
+    ipv6: true,
   },
 };
 

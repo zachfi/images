@@ -13,6 +13,7 @@ steps:
     dockerfile: aur-build-image/Dockerfile
     dry_run: false
     insecure: true
+    ipv6: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image
@@ -26,6 +27,7 @@ steps:
     dockerfile: build-image/Dockerfile
     dry_run: false
     insecure: true
+    ipv6: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/build-image
@@ -39,6 +41,7 @@ steps:
     dockerfile: chrony/Dockerfile
     dry_run: false
     insecure: true
+    ipv6: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/chrony
@@ -52,6 +55,7 @@ steps:
     dockerfile: dhcp-kea/Dockerfile
     dry_run: false
     insecure: true
+    ipv6: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea
@@ -65,6 +69,7 @@ steps:
     dockerfile: dovecot/Dockerfile
     dry_run: false
     insecure: true
+    ipv6: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/dovecot
@@ -78,6 +83,7 @@ steps:
     dockerfile: nsd/Dockerfile
     dry_run: false
     insecure: true
+    ipv6: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/nsd
@@ -91,6 +97,7 @@ steps:
     dockerfile: postfix/Dockerfile
     dry_run: false
     insecure: true
+    ipv6: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/postfix
@@ -104,6 +111,7 @@ steps:
     dockerfile: printer/Dockerfile
     dry_run: false
     insecure: true
+    ipv6: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/printer
@@ -117,6 +125,7 @@ steps:
     dockerfile: shell/Dockerfile
     dry_run: false
     insecure: true
+    ipv6: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/shell
@@ -130,6 +139,7 @@ steps:
     dockerfile: syslog/Dockerfile
     dry_run: false
     insecure: true
+    ipv6: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/syslog
@@ -143,6 +153,7 @@ steps:
     dockerfile: unbound/Dockerfile
     dry_run: false
     insecure: true
+    ipv6: true
     purge: false
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/unbound
@@ -523,6 +534,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: f604a25f0bcd0be155562af77899d245949f3bbbbe927d15a761c809eac3df2c
+hmac: 6e5f880889d7a913683aef1033112971f2ac362bdaa2211867f1ef748d38bfd1
 
 ...
