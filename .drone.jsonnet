@@ -43,9 +43,9 @@ local dockerBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm6
   image: 'plugins/docker',
   pull_image: true,
   platform: platform,
-  dry_run: dry,
-  compress: true,
   settings: {
+    compress: true,
+    dry_run: dry,
     purge: purge,
     dockerfile: '%s/Dockerfile' % name,
     context: name,
@@ -56,6 +56,23 @@ local dockerBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm6
       from_secret: 'DOCKER_PASSWORD',
     },
     repo: '%s/%s' % [owner, name],
+  },
+};
+
+local localBuild(name, dry=false, purge=true, platform='linux/amd64,linux/arm64') = {
+  name: 'local-%s/%s' % [owner, name],
+  image: 'plugins/docker',
+  pull_image: true,
+  platform: platform,
+  settings: {
+    dry_run: dry,
+    purge: purge,
+    compress: true,
+    dockerfile: '%s/Dockerfile' % name,
+    context: name,
+    repo: '%s/%s' % [owner, name],
+    registry: localRegistry,
+    insecure: true,
   },
 };
 
@@ -71,14 +88,6 @@ local step(name) = {
 
 local make(target) = step(target) {
   commands: ['make %s' % target],
-};
-
-local localPush(target, tag='latest') = step('local-%s' % target) {
-  local image = '%(owner)s/%(target)s:%(tag)s' % { owner: owner, target: target, tag: tag },
-  commands: [
-    'docker tag %(image)s %(localRegistry)s/%(image)s' % { image: image, localRegistry: localRegistry },
-    'docker push %(localRegistry)s/%(image)s' % { image: image, localRegistry: localRegistry },
-  ],
 };
 
 local cleanup() = {
@@ -100,7 +109,7 @@ local cleanup() = {
                 for f in stdImages
               ]
               + [
-                localPush(f)
+                localBuild(f)
                 for f in stdImages
               ],
 

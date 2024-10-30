@@ -3,270 +3,314 @@ depends_on: []
 kind: pipeline
 name: build
 steps:
-- compress: true
-  dry_run: false
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/aur-build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: aur-build-image
     dockerfile: aur-build-image/Dockerfile
+    dry_run: false
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/aur-build-image
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: false
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: build-image
     dockerfile: build-image/Dockerfile
+    dry_run: false
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/build-image
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: false
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/chrony
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: chrony
     dockerfile: chrony/Dockerfile
+    dry_run: false
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/chrony
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: false
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/dhcp-kea
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: dhcp-kea
     dockerfile: dhcp-kea/Dockerfile
+    dry_run: false
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/dhcp-kea
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: false
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/dovecot
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: dovecot
     dockerfile: dovecot/Dockerfile
+    dry_run: false
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/dovecot
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: false
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/nsd
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: nsd
     dockerfile: nsd/Dockerfile
+    dry_run: false
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/nsd
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: false
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/postfix
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: postfix
     dockerfile: postfix/Dockerfile
+    dry_run: false
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/postfix
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: false
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/printer
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: printer
     dockerfile: printer/Dockerfile
+    dry_run: false
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/printer
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: false
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/shell
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: shell
     dockerfile: shell/Dockerfile
+    dry_run: false
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/shell
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: false
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/syslog
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: syslog
     dockerfile: syslog/Dockerfile
+    dry_run: false
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/syslog
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: false
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/unbound
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: unbound
     dockerfile: unbound/Dockerfile
+    dry_run: false
     password:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/unbound
     username:
       from_secret: DOCKER_USERNAME
-- commands:
-  - docker tag zachfi/aur-build-image:latest reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image:latest
-  image: zachfi/build-image
-  name: local-aur-build-image
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/build-image:latest reg.dist.svc.cluster.znet:5000/zachfi/build-image:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/build-image:latest
-  image: zachfi/build-image
-  name: local-build-image
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/chrony:latest reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
-  image: zachfi/build-image
-  name: local-chrony
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/dhcp-kea:latest reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea:latest
-  image: zachfi/build-image
-  name: local-dhcp-kea
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/dovecot:latest reg.dist.svc.cluster.znet:5000/zachfi/dovecot:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/dovecot:latest
-  image: zachfi/build-image
-  name: local-dovecot
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/nsd:latest reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
-  image: zachfi/build-image
-  name: local-nsd
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/postfix:latest reg.dist.svc.cluster.znet:5000/zachfi/postfix:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/postfix:latest
-  image: zachfi/build-image
-  name: local-postfix
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/printer:latest reg.dist.svc.cluster.znet:5000/zachfi/printer:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/printer:latest
-  image: zachfi/build-image
-  name: local-printer
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/shell:latest reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
-  image: zachfi/build-image
-  name: local-shell
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/syslog:latest reg.dist.svc.cluster.znet:5000/zachfi/syslog:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/syslog:latest
-  image: zachfi/build-image
-  name: local-syslog
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/unbound:latest reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
-  image: zachfi/build-image
-  name: local-unbound
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
+- image: plugins/docker
+  name: local-zachfi/aur-build-image
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: aur-build-image
+    dockerfile: aur-build-image/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: true
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/aur-build-image
+- image: plugins/docker
+  name: local-zachfi/build-image
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: build-image
+    dockerfile: build-image/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: true
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/build-image
+- image: plugins/docker
+  name: local-zachfi/chrony
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: chrony
+    dockerfile: chrony/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: true
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/chrony
+- image: plugins/docker
+  name: local-zachfi/dhcp-kea
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: dhcp-kea
+    dockerfile: dhcp-kea/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: true
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/dhcp-kea
+- image: plugins/docker
+  name: local-zachfi/dovecot
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: dovecot
+    dockerfile: dovecot/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: true
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/dovecot
+- image: plugins/docker
+  name: local-zachfi/nsd
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: nsd
+    dockerfile: nsd/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: true
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/nsd
+- image: plugins/docker
+  name: local-zachfi/postfix
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: postfix
+    dockerfile: postfix/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: true
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/postfix
+- image: plugins/docker
+  name: local-zachfi/printer
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: printer
+    dockerfile: printer/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: true
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/printer
+- image: plugins/docker
+  name: local-zachfi/shell
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: shell
+    dockerfile: shell/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: true
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/shell
+- image: plugins/docker
+  name: local-zachfi/syslog
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: syslog
+    dockerfile: syslog/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: true
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/syslog
+- image: plugins/docker
+  name: local-zachfi/unbound
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: unbound
+    dockerfile: unbound/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: true
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/unbound
 trigger:
   ref:
   - refs/heads/main
@@ -280,165 +324,165 @@ depends_on: []
 kind: pipeline
 name: pr
 steps:
-- compress: true
-  dry_run: true
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/aur-build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: aur-build-image
     dockerfile: aur-build-image/Dockerfile
+    dry_run: true
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
     repo: zachfi/aur-build-image
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: true
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: build-image
     dockerfile: build-image/Dockerfile
+    dry_run: true
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
     repo: zachfi/build-image
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: true
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/chrony
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: chrony
     dockerfile: chrony/Dockerfile
+    dry_run: true
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
     repo: zachfi/chrony
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: true
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/dhcp-kea
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: dhcp-kea
     dockerfile: dhcp-kea/Dockerfile
+    dry_run: true
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
     repo: zachfi/dhcp-kea
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: true
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/dovecot
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: dovecot
     dockerfile: dovecot/Dockerfile
+    dry_run: true
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
     repo: zachfi/dovecot
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: true
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/nsd
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: nsd
     dockerfile: nsd/Dockerfile
+    dry_run: true
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
     repo: zachfi/nsd
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: true
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/postfix
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: postfix
     dockerfile: postfix/Dockerfile
+    dry_run: true
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
     repo: zachfi/postfix
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: true
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/printer
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: printer
     dockerfile: printer/Dockerfile
+    dry_run: true
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
     repo: zachfi/printer
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: true
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/shell
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: shell
     dockerfile: shell/Dockerfile
+    dry_run: true
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
     repo: zachfi/shell
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: true
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/syslog
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: syslog
     dockerfile: syslog/Dockerfile
+    dry_run: true
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
     repo: zachfi/syslog
     username:
       from_secret: DOCKER_USERNAME
-- compress: true
-  dry_run: true
-  image: plugins/docker
+- image: plugins/docker
   name: docker-zachfi/unbound
   platform: linux/amd64,linux/arm64
   pull_image: true
   settings:
+    compress: true
     context: unbound
     dockerfile: unbound/Dockerfile
+    dry_run: true
     password:
       from_secret: DOCKER_PASSWORD
     purge: true
@@ -479,6 +523,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 5ec8c3ce4db320497b21788dacc9a561f513e4462c6b90f2b72175c691fddee2
+hmac: 299bbe3fa215634200bade3cbe4178fa1f46d446294eccfb321e835fd0c68a3f
 
 ...
