@@ -104,9 +104,14 @@ local cleanup() = {
   (
     pipeline('pr') {
       steps+: [
-        dockerBuild(f, dry=true, purge=true)
-        for f in stdImages
-      ],
+                dockerBuild(f, dry=true, purge=true)
+                for f in stdImages
+              ]
+              + [
+                localPush(f)
+                for f in stdImages
+              ]
+      ,
       trigger: {
         branch: {
           exclude: ['main'],
@@ -118,21 +123,21 @@ local cleanup() = {
       },
     }
   ),
+  // (
+  //   pipeline('localpush', depends_on=['build']) {
+  //     steps+: [
+  //       localPush(f)
+  //       for f in stdImages
+  //     ],
+  //     trigger: {
+  //       branch: [
+  //         'main',
+  //       ],
+  //     },
+  //   }
+  // ),
   (
-    pipeline('localpush', depends_on=['build']) {
-      steps+: [
-        localPush(f)
-        for f in stdImages
-      ],
-      trigger: {
-        branch: [
-          'main',
-        ],
-      },
-    }
-  ),
-  (
-    pipeline('cleanup', depends_on=['localpush']) {
+    pipeline('cleanup', depends_on=['build']) {
       steps+: [
         cleanup(),
       ],

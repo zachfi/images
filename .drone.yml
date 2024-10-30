@@ -346,23 +346,6 @@ steps:
     repo: zachfi/unbound
     username:
       from_secret: DOCKER_USERNAME
-trigger:
-  branch:
-    exclude:
-    - main
-  event:
-  - push
-  - pull_request
-volumes:
-- host:
-    path: /var/run/docker.sock
-  name: dockersock
----
-depends_on:
-- build
-kind: pipeline
-name: localpush
-steps:
 - commands:
   - docker tag zachfi/aur-build-image:latest reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image:latest
@@ -464,14 +447,18 @@ steps:
     path: /var/run/docker.sock
 trigger:
   branch:
-  - main
+    exclude:
+    - main
+  event:
+  - push
+  - pull_request
 volumes:
 - host:
     path: /var/run/docker.sock
   name: dockersock
 ---
 depends_on:
-- localpush
+- build
 kind: pipeline
 name: cleanup
 steps:
@@ -492,6 +479,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 6c4000e1234a2782962eb697ff41ef9f24f8f8b72d59d5242ba18181572cc3bf
+hmac: dbbba5b4bd4c4f8ebb6ffff16be6a5dc33d58015993797cb8c997715be6a6d49
 
 ...
