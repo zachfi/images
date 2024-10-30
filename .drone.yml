@@ -587,6 +587,7 @@ name: cleanup
 steps:
 - commands:
   - docker system prune -f
+  - docker image prune -a -f
   image: zachfi/build-image
   name: cleanup
   pull: always
@@ -602,6 +603,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 3890ead93496136abcd0dcdfc75234af9e3d4c27f5c658806f6759faa55ca287
+hmac: 3dffe7d7d2b44396d953e431397ae1efea3f4b6f332dce0191dc7319270d08c9
 
 ...
