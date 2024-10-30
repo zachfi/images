@@ -59,7 +59,7 @@ local dockerBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm6
   },
 };
 
-local localBuild(name, dry=false, purge=true, platform='linux/amd64,linux/arm64') = {
+local localBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm64') = {
   name: 'local-%s/%s' % [owner, name],
   image: 'plugins/docker',
   pull_image: true,

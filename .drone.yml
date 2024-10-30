@@ -4,6 +4,149 @@ kind: pipeline
 name: build
 steps:
 - image: plugins/docker
+  name: local-zachfi/aur-build-image
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: aur-build-image
+    dockerfile: aur-build-image/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: false
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/aur-build-image
+- image: plugins/docker
+  name: local-zachfi/build-image
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: build-image
+    dockerfile: build-image/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: false
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/build-image
+- image: plugins/docker
+  name: local-zachfi/chrony
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: chrony
+    dockerfile: chrony/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: false
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/chrony
+- image: plugins/docker
+  name: local-zachfi/dhcp-kea
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: dhcp-kea
+    dockerfile: dhcp-kea/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: false
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/dhcp-kea
+- image: plugins/docker
+  name: local-zachfi/dovecot
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: dovecot
+    dockerfile: dovecot/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: false
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/dovecot
+- image: plugins/docker
+  name: local-zachfi/nsd
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: nsd
+    dockerfile: nsd/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: false
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/nsd
+- image: plugins/docker
+  name: local-zachfi/postfix
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: postfix
+    dockerfile: postfix/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: false
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/postfix
+- image: plugins/docker
+  name: local-zachfi/printer
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: printer
+    dockerfile: printer/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: false
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/printer
+- image: plugins/docker
+  name: local-zachfi/shell
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: shell
+    dockerfile: shell/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: false
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/shell
+- image: plugins/docker
+  name: local-zachfi/syslog
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: syslog
+    dockerfile: syslog/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: false
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/syslog
+- image: plugins/docker
+  name: local-zachfi/unbound
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: unbound
+    dockerfile: unbound/Dockerfile
+    dry_run: false
+    insecure: true
+    purge: false
+    registry: reg.dist.svc.cluster.znet:5000
+    repo: zachfi/unbound
+- image: plugins/docker
   name: docker-zachfi/aur-build-image
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -168,149 +311,6 @@ steps:
     repo: zachfi/unbound
     username:
       from_secret: DOCKER_USERNAME
-- image: plugins/docker
-  name: local-zachfi/aur-build-image
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: aur-build-image
-    dockerfile: aur-build-image/Dockerfile
-    dry_run: false
-    insecure: true
-    purge: true
-    registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/aur-build-image
-- image: plugins/docker
-  name: local-zachfi/build-image
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: build-image
-    dockerfile: build-image/Dockerfile
-    dry_run: false
-    insecure: true
-    purge: true
-    registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/build-image
-- image: plugins/docker
-  name: local-zachfi/chrony
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: chrony
-    dockerfile: chrony/Dockerfile
-    dry_run: false
-    insecure: true
-    purge: true
-    registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/chrony
-- image: plugins/docker
-  name: local-zachfi/dhcp-kea
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: dhcp-kea
-    dockerfile: dhcp-kea/Dockerfile
-    dry_run: false
-    insecure: true
-    purge: true
-    registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/dhcp-kea
-- image: plugins/docker
-  name: local-zachfi/dovecot
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: dovecot
-    dockerfile: dovecot/Dockerfile
-    dry_run: false
-    insecure: true
-    purge: true
-    registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/dovecot
-- image: plugins/docker
-  name: local-zachfi/nsd
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: nsd
-    dockerfile: nsd/Dockerfile
-    dry_run: false
-    insecure: true
-    purge: true
-    registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/nsd
-- image: plugins/docker
-  name: local-zachfi/postfix
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: postfix
-    dockerfile: postfix/Dockerfile
-    dry_run: false
-    insecure: true
-    purge: true
-    registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/postfix
-- image: plugins/docker
-  name: local-zachfi/printer
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: printer
-    dockerfile: printer/Dockerfile
-    dry_run: false
-    insecure: true
-    purge: true
-    registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/printer
-- image: plugins/docker
-  name: local-zachfi/shell
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: shell
-    dockerfile: shell/Dockerfile
-    dry_run: false
-    insecure: true
-    purge: true
-    registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/shell
-- image: plugins/docker
-  name: local-zachfi/syslog
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: syslog
-    dockerfile: syslog/Dockerfile
-    dry_run: false
-    insecure: true
-    purge: true
-    registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/syslog
-- image: plugins/docker
-  name: local-zachfi/unbound
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: unbound
-    dockerfile: unbound/Dockerfile
-    dry_run: false
-    insecure: true
-    purge: true
-    registry: reg.dist.svc.cluster.znet:5000
-    repo: zachfi/unbound
 trigger:
   ref:
   - refs/heads/main
@@ -523,6 +523,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 299bbe3fa215634200bade3cbe4178fa1f46d446294eccfb321e835fd0c68a3f
+hmac: 7686d475a254e8c9fee807a7c445c20eb3b96bffe14af6610c8c61da20d1ac34
 
 ...
