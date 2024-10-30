@@ -77,11 +77,8 @@ local localBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm64
     ipv6: true,
     daemon_off: true,
   },
-  volumes: [
-    {
-      name: 'dockersocket',
-      path: '/var/lib/docker.sock',
-    },
+  volumes+: [
+    { name: 'dockersock', path: '/var/run/docker.sock' },
   ],
 };
 

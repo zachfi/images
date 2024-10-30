@@ -20,8 +20,8 @@ steps:
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image
   volumes:
-  - name: dockersocket
-    path: /var/lib/docker.sock
+  - name: dockersock
+    path: /var/run/docker.sock
 - image: plugins/docker
   name: local-zachfi/build-image
   platform: linux/amd64,linux/arm64
@@ -39,8 +39,8 @@ steps:
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/build-image
   volumes:
-  - name: dockersocket
-    path: /var/lib/docker.sock
+  - name: dockersock
+    path: /var/run/docker.sock
 - image: plugins/docker
   name: local-zachfi/chrony
   platform: linux/amd64,linux/arm64
@@ -58,8 +58,8 @@ steps:
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/chrony
   volumes:
-  - name: dockersocket
-    path: /var/lib/docker.sock
+  - name: dockersock
+    path: /var/run/docker.sock
 - image: plugins/docker
   name: local-zachfi/dhcp-kea
   platform: linux/amd64,linux/arm64
@@ -77,8 +77,8 @@ steps:
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea
   volumes:
-  - name: dockersocket
-    path: /var/lib/docker.sock
+  - name: dockersock
+    path: /var/run/docker.sock
 - image: plugins/docker
   name: local-zachfi/dovecot
   platform: linux/amd64,linux/arm64
@@ -96,8 +96,8 @@ steps:
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/dovecot
   volumes:
-  - name: dockersocket
-    path: /var/lib/docker.sock
+  - name: dockersock
+    path: /var/run/docker.sock
 - image: plugins/docker
   name: local-zachfi/nsd
   platform: linux/amd64,linux/arm64
@@ -115,8 +115,8 @@ steps:
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/nsd
   volumes:
-  - name: dockersocket
-    path: /var/lib/docker.sock
+  - name: dockersock
+    path: /var/run/docker.sock
 - image: plugins/docker
   name: local-zachfi/postfix
   platform: linux/amd64,linux/arm64
@@ -134,8 +134,8 @@ steps:
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/postfix
   volumes:
-  - name: dockersocket
-    path: /var/lib/docker.sock
+  - name: dockersock
+    path: /var/run/docker.sock
 - image: plugins/docker
   name: local-zachfi/printer
   platform: linux/amd64,linux/arm64
@@ -153,8 +153,8 @@ steps:
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/printer
   volumes:
-  - name: dockersocket
-    path: /var/lib/docker.sock
+  - name: dockersock
+    path: /var/run/docker.sock
 - image: plugins/docker
   name: local-zachfi/shell
   platform: linux/amd64,linux/arm64
@@ -172,8 +172,8 @@ steps:
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/shell
   volumes:
-  - name: dockersocket
-    path: /var/lib/docker.sock
+  - name: dockersock
+    path: /var/run/docker.sock
 - image: plugins/docker
   name: local-zachfi/syslog
   platform: linux/amd64,linux/arm64
@@ -191,8 +191,8 @@ steps:
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/syslog
   volumes:
-  - name: dockersocket
-    path: /var/lib/docker.sock
+  - name: dockersock
+    path: /var/run/docker.sock
 - image: plugins/docker
   name: local-zachfi/unbound
   platform: linux/amd64,linux/arm64
@@ -210,8 +210,8 @@ steps:
     registry: reg.dist.svc.cluster.znet:5000
     repo: reg.dist.svc.cluster.znet:5000/zachfi/unbound
   volumes:
-  - name: dockersocket
-    path: /var/lib/docker.sock
+  - name: dockersock
+    path: /var/run/docker.sock
 - image: plugins/docker
   name: docker-zachfi/aur-build-image
   platform: linux/amd64,linux/arm64
@@ -589,6 +589,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 3640010fe2e5f5c94ca17e4dd868efc129c56b1160446ef025d988fda7fba76a
+hmac: 4e1c7daed4177d397f863eb8b8dd3e9443a3dd3b09a60626fc9a29ab98fe9722
 
 ...
