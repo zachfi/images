@@ -38,14 +38,15 @@ local pipeline(name, depends_on=[]) = {
   ],
 };
 
-local dockerBuild(name, dry=false, platform='linux/amd64,linux/arm64', purge=false) = {
+local dockerBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm64') = {
   name: 'docker-%s/%s' % [owner, name],
   image: 'plugins/docker',
   pull_image: true,
   platform: platform,
   dry_run: dry,
-  purge: purge,
+  compress: true,
   settings: {
+    purge: purge,
     dockerfile: '%s/Dockerfile' % name,
     context: name,
     username: {
@@ -54,6 +55,7 @@ local dockerBuild(name, dry=false, platform='linux/amd64,linux/arm64', purge=fal
     password: {
       from_secret: 'DOCKER_PASSWORD',
     },
+    registry: localRegistry,
     repo: '%s/%s' % [owner, name],
   },
 };
@@ -72,7 +74,6 @@ local make(target) = step(target) {
   commands: ['make %s' % target],
 };
 
-
 local localPush(target, tag='latest') = step(target) {
   local image = '%(owner)s/%(target)s:%(tag)s' % { owner: owner, target: target, tag: tag },
   commands: [
@@ -80,7 +81,6 @@ local localPush(target, tag='latest') = step(target) {
     'docker push %(localRegistry)s/%(image)s' % { image: image, localRegistry: localRegistry },
   ],
 };
-
 
 local cleanup() = {
   name: 'cleanup',
