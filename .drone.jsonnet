@@ -117,7 +117,7 @@ local cleanup() = {
     { name: 'dockersock', path: '/var/run/docker.sock' },
   ],
   commands: [
-    '/usr/local/bin/docker system prune -f',
+    'docker system prune -f',
   ],
 };
 [
@@ -161,7 +161,7 @@ local cleanup() = {
     }
   ),
   (
-    pipeline('cleanup', depends_on=['build']) {
+    pipeline('cleanup', depends_on=['localpush']) {
       steps+: [
         cleanup(),
       ],

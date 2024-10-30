@@ -581,12 +581,12 @@ volumes:
   name: dockersock
 ---
 depends_on:
-- build
+- localpush
 kind: pipeline
 name: cleanup
 steps:
 - commands:
-  - /usr/local/bin/docker system prune -f
+  - docker system prune -f
   image: zachfi/build-image
   name: cleanup
   pull: always
@@ -602,6 +602,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 432ac8ce6ae5b733b0df0d95314237ec9f52fe55385d4192507646ccaaceed9b
+hmac: 1eb0f6b1ff7b9913ca9b5c31ac1e3afd573d3bd60503d8f89739f9508fe4a42b
 
 ...
