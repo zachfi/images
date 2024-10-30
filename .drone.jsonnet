@@ -56,7 +56,12 @@ local dockerBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm6
       from_secret: 'DOCKER_PASSWORD',
     },
     repo: '%s/%s' % [owner, name],
+    ipv6: true,
+    daemon_off: true,
   },
+  volumes+: [
+    { name: 'dockersock', path: '/var/run/docker.sock' },
+  ],
 };
 
 local localBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm64') = {
@@ -92,6 +97,14 @@ local step(name) = {
   ],
 };
 
+local localPush(target, tag='latest') = step(target) {
+  local image = '%(owner)s/%(target)s:%(tag)s' % { owner: owner, target: target, tag: tag },
+  commands: [
+    'docker tag %(image)s %(localRegistry)s0/%(image)s' % { image: image, localRegistry: localRegistry },
+    'docker push %(localRegistry)s:5000/%(image)s' % { image: image, localRegistry: localRegistry },
+  ],
+};
+
 local make(target) = step(target) {
   commands: ['make %s' % target],
 };
@@ -111,14 +124,9 @@ local cleanup() = {
   (
     pipeline('build') {
       steps+: [
-                localBuild(f)
-                for f in stdImages
-              ]
-              + [
-                dockerBuild(f)
-                for f in stdImages
-              ],
-
+        dockerBuild(f)
+        for f in stdImages
+      ],
     }
   ),
   (
@@ -139,19 +147,19 @@ local cleanup() = {
       },
     }
   ),
-  // (
-  //   pipeline('localpush', depends_on=['build']) {
-  //     steps+: [
-  //       localPush(f)
-  //       for f in stdImages
-  //     ],
-  //     trigger: {
-  //       branch: [
-  //         'main',
-  //       ],
-  //     },
-  //   }
-  // ),
+  (
+    pipeline('localpush', depends_on=['build']) {
+      steps+: [
+        localPush(f)
+        for f in stdImages
+      ],
+      trigger: {
+        branch: [
+          'main',
+        ],
+      },
+    }
+  ),
   (
     pipeline('cleanup', depends_on=['build']) {
       steps+: [
