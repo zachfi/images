@@ -224,9 +224,6 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
 trigger:
-  event:
-  - push
-  - cron
   ref:
   - refs/heads/main
   - refs/tags/v*
@@ -605,6 +602,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: f30529f36cff772760a4478dfad95722737d3b24dad7a6cfa84e38081bbe61af
+hmac: 3890ead93496136abcd0dcdfc75234af9e3d4c27f5c658806f6759faa55ca287
 
 ...

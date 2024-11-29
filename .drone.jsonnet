@@ -25,7 +25,6 @@ local pipeline(name, depends_on=[]) = {
       'refs/heads/main',
       'refs/tags/v*',
     ],
-    event: ['push', 'cron'],
     // event: [
     //   'cron',
     // ],
