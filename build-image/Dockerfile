@@ -5,6 +5,7 @@ LABEL maintainer="none"
 RUN apk update && apk add make git util-linux bash docker kubectl openrc
 
 RUN go install github.com/goreleaser/goreleaser/v2@v2.3.2
+RUN go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.62.2
 
 # RUN echo nope:100000:65536 > /etc/subuid
 # RUN echo nope:100000:65536 > /etc/subgid
