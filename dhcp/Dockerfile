@@ -1,4 +1,4 @@
-FROM  alpine:3.19
+FROM  alpine:3.21
 LABEL description "ISC DHCP server"
 RUN apk --update --no-cache add dhcp && rm -rf /var/cache/apk/*
 RUN touch /var/lib/dhcp/leases
