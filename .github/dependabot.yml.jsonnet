@@ -21,6 +21,7 @@ std.manifestYamlDoc(
 
     updates: [
       {
+        'package-ecosystem': 'docker',
         directory: '/%s' % name,
         schedule: {
           interval: 'daily',
