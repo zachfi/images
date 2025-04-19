@@ -1,10 +1,44 @@
-version: 2
 updates:
-  - package-ecosystem: 'docker'
-    directory: '/'
+  - directory: "/aur-build-image"
     schedule:
-      interval: 'daily'
-  - package-ecosystem: 'docker'
-    directory: '/unbound'
+      interval: "daily"
+  - directory: "/build-image"
     schedule:
-      interval: 'daily'
+      interval: "daily"
+  - directory: "/chrony"
+    schedule:
+      interval: "daily"
+  - directory: "/dhcp"
+    schedule:
+      interval: "daily"
+  - directory: "/dhcp-kea"
+    schedule:
+      interval: "daily"
+  - directory: "/dovecot"
+    schedule:
+      interval: "daily"
+  - directory: "/nsd"
+    schedule:
+      interval: "daily"
+  - directory: "/nvidia"
+    schedule:
+      interval: "daily"
+  - directory: "/pkgng"
+    schedule:
+      interval: "daily"
+  - directory: "/postfix"
+    schedule:
+      interval: "daily"
+  - directory: "/printer"
+    schedule:
+      interval: "daily"
+  - directory: "/shell"
+    schedule:
+      interval: "daily"
+  - directory: "/syslog"
+    schedule:
+      interval: "daily"
+  - directory: "/unbound"
+    schedule:
+      interval: "daily"
+version: 2

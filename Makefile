@@ -11,6 +11,10 @@ ifndef DRONE_TOKEN
 endif
 	@DRONE_SERVER=https://drone.zach.fi drone sign --save zachfi/images .drone.yml
 
+.PHONY: .github/dependabot.yml
+.github/dependabot.yml:
+	@jsonnet -S .github/dependabot.yml.jsonnet -o .github/dependabot.yml
+
 modules:
 	@git submodule init
 	@git submodule update
