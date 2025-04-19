@@ -1,4 +1,4 @@
-FROM  alpine:3.19
+FROM  alpine:3.21
 LABEL description "ISC KEA DHCP server"
 RUN apk --update --no-cache add kea && rm -rf /var/cache/apk/*
 #RUN touch /var/lib/dhcp/leases
