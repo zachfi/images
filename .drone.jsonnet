@@ -7,6 +7,7 @@ local stdImages = [
   'nsd',
   'postfix',
   'printer',
+  'restic',
   'shell',
   'syslog',
   'unbound',

@@ -25,8 +25,13 @@ build-image:
 
 shell:
 	@docker pull archlinux/archlinux:base-devel
-	@docker build shell/ -t zachfi/shell:latest
+	@docker build shell/ -t reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
 	@docker push reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
+
+restic:
+	@docker pull alpine:3
+	@docker build restic/ -t reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
+	@docker push reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
 
 nvidia:
 	@docker build nvidia/ -t zachfi/miner:nvidia
@@ -63,4 +68,4 @@ pkgng:
 	@docker build pkgng -t zachfi/www:pkg
 	@docker push zachfi/www:pkg
 
-.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea pkgng openldap_exporter motion postfix dovecot build-image
+.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea pkgng openldap_exporter motion postfix dovecot build-image restic

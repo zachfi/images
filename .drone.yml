@@ -164,6 +164,26 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
 - image: plugins/docker
+  name: docker-zachfi/restic
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: restic
+    daemon_off: true
+    dockerfile: restic/Dockerfile
+    dry_run: false
+    ipv6: true
+    password:
+      from_secret: DOCKER_PASSWORD
+    purge: false
+    repo: zachfi/restic
+    username:
+      from_secret: DOCKER_USERNAME
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+- image: plugins/docker
   name: docker-zachfi/shell
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -397,6 +417,26 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
 - image: plugins/docker
+  name: docker-zachfi/restic
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: restic
+    daemon_off: true
+    dockerfile: restic/Dockerfile
+    dry_run: true
+    ipv6: true
+    password:
+      from_secret: DOCKER_PASSWORD
+    purge: true
+    repo: zachfi/restic
+    username:
+      from_secret: DOCKER_USERNAME
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+- image: plugins/docker
   name: docker-zachfi/shell
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -546,6 +586,15 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
 - commands:
+  - docker tag zachfi/restic:latest reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
+  image: zachfi/build-image
+  name: restic
+  pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+- commands:
   - docker tag zachfi/shell:latest reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
   image: zachfi/build-image
@@ -602,6 +651,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 3890ead93496136abcd0dcdfc75234af9e3d4c27f5c658806f6759faa55ca287
+hmac: 9807ab8dab7c11770ef7c5acae98a152d1af8dc863efbaeeb4fbbf3459a8f456
 
 ...
