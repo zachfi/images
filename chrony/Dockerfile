@@ -1,4 +1,4 @@
-FROM  alpine:3.21
+FROM  alpine:3.22
 LABEL description "Time sync with Chrony and GPSd"
 RUN apk --update --no-cache add chrony gpsd gpsd-clients && \
   rm -rf /var/cache/apk/* /etc/chrony
