@@ -5,7 +5,7 @@ WORKDIR /workspace/
 RUN go install github.com/letsencrypt/unbound_exporter@latest
 RUN which unbound_exporter
 
-FROM alpine:3.21
+FROM alpine:3.22
 
 LABEL description "Unbound caching DNS resolver"
 
