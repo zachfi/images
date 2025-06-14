@@ -1,4 +1,4 @@
-FROM golang:1.23-alpine3.19
+FROM golang:1.24-alpine
 LABEL maintainer="none"
 
 # RUN apk update && apk add make go buildah git shadow-subids findmnt util-linux rootlesskit buildkit buildctl docker
