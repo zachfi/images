@@ -5,6 +5,7 @@ local stdImages = [
   'dhcp-kea',
   'dovecot',
   'nsd',
+  'pkgng',
   'postfix',
   'printer',
   'restic',
