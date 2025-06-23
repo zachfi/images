@@ -40,7 +40,7 @@ local pipeline(name, depends_on=[]) = {
   ],
 };
 
-local dockerBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm64') = {
+local dockerBuild(name, dry=true, purge=false, platform='linux/amd64,linux/arm64') = {
   name: 'docker-%s/%s' % [owner, name],
   image: 'plugins/docker',
   pull_image: true,

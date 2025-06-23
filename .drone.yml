@@ -12,7 +12,7 @@ steps:
     context: aur-build-image
     daemon_off: true
     dockerfile: aur-build-image/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -32,7 +32,7 @@ steps:
     context: build-image
     daemon_off: true
     dockerfile: build-image/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -52,7 +52,7 @@ steps:
     context: chrony
     daemon_off: true
     dockerfile: chrony/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -72,7 +72,7 @@ steps:
     context: cron
     daemon_off: true
     dockerfile: cron/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -92,7 +92,7 @@ steps:
     context: dhcp-kea
     daemon_off: true
     dockerfile: dhcp-kea/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -112,7 +112,7 @@ steps:
     context: dovecot
     daemon_off: true
     dockerfile: dovecot/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -132,7 +132,7 @@ steps:
     context: nsd
     daemon_off: true
     dockerfile: nsd/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -152,7 +152,7 @@ steps:
     context: postfix
     daemon_off: true
     dockerfile: postfix/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -172,7 +172,7 @@ steps:
     context: printer
     daemon_off: true
     dockerfile: printer/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -192,7 +192,7 @@ steps:
     context: restic
     daemon_off: true
     dockerfile: restic/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -212,7 +212,7 @@ steps:
     context: shell
     daemon_off: true
     dockerfile: shell/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -232,7 +232,7 @@ steps:
     context: syslog
     daemon_off: true
     dockerfile: syslog/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -252,7 +252,7 @@ steps:
     context: unbound
     daemon_off: true
     dockerfile: unbound/Dockerfile
-    dry_run: false
+    dry_run: true
     ipv6: true
     password:
       from_secret: DOCKER_PASSWORD
@@ -700,6 +700,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: ceb4cb508911d148fa20de3d56fb71d69016f8f452e7a933ede3bf7030115594
+hmac: 25b2df3201dbe470c8e2132c2dc516d4827bbec57f393dc9ed9fc763ac79f3c1
 
 ...
