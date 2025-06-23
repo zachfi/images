@@ -1,3 +1,3 @@
 FROM  alpine:3.22
-RUN apk update && apk add rsync cron bash && rm -rf /var/cache/apk/*
+RUN apk update && apk add rsync bash
 CMD cron -f

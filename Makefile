@@ -64,8 +64,8 @@ dhcp-kea:
 	@docker build dhcp-kea -t zachfi/dhcp-kea:latest
 	@docker push zachfi/dhcp-kea:latest
 
-pkgng:
-	@docker build pkgng -t zachfi/www:pkg
-	@docker push zachfi/www:pkg
+cron:
+	@docker build cron -t zachfi/cron:latest
+	@docker push zachfi/cron:latest
 
-.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea pkgng openldap_exporter motion postfix dovecot build-image restic
+.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea cron openldap_exporter motion postfix dovecot build-image restic
