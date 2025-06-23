@@ -64,6 +64,26 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
 - image: plugins/docker
+  name: docker-zachfi/cron
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: cron
+    daemon_off: true
+    dockerfile: cron/Dockerfile
+    dry_run: false
+    ipv6: true
+    password:
+      from_secret: DOCKER_PASSWORD
+    purge: false
+    repo: zachfi/cron
+    username:
+      from_secret: DOCKER_USERNAME
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+- image: plugins/docker
   name: docker-zachfi/dhcp-kea
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -118,26 +138,6 @@ steps:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/nsd
-    username:
-      from_secret: DOCKER_USERNAME
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- image: plugins/docker
-  name: docker-zachfi/pkgng
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: pkgng
-    daemon_off: true
-    dockerfile: pkgng/Dockerfile
-    dry_run: false
-    ipv6: true
-    password:
-      from_secret: DOCKER_PASSWORD
-    purge: false
-    repo: zachfi/pkgng
     username:
       from_secret: DOCKER_USERNAME
   volumes:
@@ -337,6 +337,26 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
 - image: plugins/docker
+  name: docker-zachfi/cron
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: cron
+    daemon_off: true
+    dockerfile: cron/Dockerfile
+    dry_run: true
+    ipv6: true
+    password:
+      from_secret: DOCKER_PASSWORD
+    purge: true
+    repo: zachfi/cron
+    username:
+      from_secret: DOCKER_USERNAME
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+- image: plugins/docker
   name: docker-zachfi/dhcp-kea
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -391,26 +411,6 @@ steps:
       from_secret: DOCKER_PASSWORD
     purge: true
     repo: zachfi/nsd
-    username:
-      from_secret: DOCKER_USERNAME
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- image: plugins/docker
-  name: docker-zachfi/pkgng
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: pkgng
-    daemon_off: true
-    dockerfile: pkgng/Dockerfile
-    dry_run: true
-    ipv6: true
-    password:
-      from_secret: DOCKER_PASSWORD
-    purge: true
-    repo: zachfi/pkgng
     username:
       from_secret: DOCKER_USERNAME
   volumes:
@@ -581,6 +581,15 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
 - commands:
+  - docker tag zachfi/cron:latest reg.dist.svc.cluster.znet:5000/zachfi/cron:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/cron:latest
+  image: zachfi/build-image
+  name: cron
+  pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+- commands:
   - docker tag zachfi/dhcp-kea:latest reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea:latest
   image: zachfi/build-image
@@ -603,15 +612,6 @@ steps:
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
   image: zachfi/build-image
   name: nsd
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/pkgng:latest reg.dist.svc.cluster.znet:5000/zachfi/pkgng:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/pkgng:latest
-  image: zachfi/build-image
-  name: pkgng
   pull: always
   volumes:
   - name: dockersock
@@ -700,6 +700,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 718fb72d7576ebf7382de817f382125bf88ecea7e8c736c257ffe8be6ec06086
+hmac: ceb4cb508911d148fa20de3d56fb71d69016f8f452e7a933ede3bf7030115594
 
 ...
