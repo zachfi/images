@@ -24,26 +24,6 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
 - image: plugins/docker
-  name: docker-zachfi/build-image
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: build-image
-    daemon_off: true
-    dockerfile: build-image/Dockerfile
-    dry_run: true
-    ipv6: true
-    password:
-      from_secret: DOCKER_PASSWORD
-    purge: false
-    repo: zachfi/build-image
-    username:
-      from_secret: DOCKER_USERNAME
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- image: plugins/docker
   name: docker-zachfi/chrony
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -238,6 +218,26 @@ steps:
       from_secret: DOCKER_PASSWORD
     purge: false
     repo: zachfi/syslog
+    username:
+      from_secret: DOCKER_USERNAME
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+- image: plugins/docker
+  name: docker-zachfi/tools
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: tools
+    daemon_off: true
+    dockerfile: tools/Dockerfile
+    dry_run: true
+    ipv6: true
+    password:
+      from_secret: DOCKER_PASSWORD
+    purge: false
+    repo: zachfi/tools
     username:
       from_secret: DOCKER_USERNAME
   volumes:
@@ -297,26 +297,6 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
 - image: plugins/docker
-  name: docker-zachfi/build-image
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: build-image
-    daemon_off: true
-    dockerfile: build-image/Dockerfile
-    dry_run: true
-    ipv6: true
-    password:
-      from_secret: DOCKER_PASSWORD
-    purge: true
-    repo: zachfi/build-image
-    username:
-      from_secret: DOCKER_USERNAME
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- image: plugins/docker
   name: docker-zachfi/chrony
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -517,6 +497,26 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
 - image: plugins/docker
+  name: docker-zachfi/tools
+  platform: linux/amd64,linux/arm64
+  pull_image: true
+  settings:
+    compress: true
+    context: tools
+    daemon_off: true
+    dockerfile: tools/Dockerfile
+    dry_run: true
+    ipv6: true
+    password:
+      from_secret: DOCKER_PASSWORD
+    purge: true
+    repo: zachfi/tools
+    username:
+      from_secret: DOCKER_USERNAME
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+- image: plugins/docker
   name: docker-zachfi/unbound
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -558,15 +558,6 @@ steps:
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image:latest
   image: zachfi/build-image
   name: aur-build-image
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
-  - docker tag zachfi/build-image:latest reg.dist.svc.cluster.znet:5000/zachfi/build-image:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/build-image:latest
-  image: zachfi/build-image
-  name: build-image
   pull: always
   volumes:
   - name: dockersock
@@ -662,6 +653,15 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
 - commands:
+  - docker tag zachfi/tools:latest reg.dist.svc.cluster.znet:5000/zachfi/tools:latest
+  - docker push reg.dist.svc.cluster.znet:5000/zachfi/tools:latest
+  image: zachfi/build-image
+  name: tools
+  pull: always
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+- commands:
   - docker tag zachfi/unbound:latest reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
   image: zachfi/build-image
@@ -700,6 +700,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 25b2df3201dbe470c8e2132c2dc516d4827bbec57f393dc9ed9fc763ac79f3c1
+hmac: 89c41d50df72c362369b08e8aa56666fbd5b05818e69dba14e7e198747febefc
 
 ...

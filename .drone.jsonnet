@@ -1,6 +1,6 @@
 local stdImages = [
   'aur-build-image',
-  'build-image',
+  // 'build-image',
   'chrony',
   'cron',
   'dhcp-kea',
@@ -11,6 +11,7 @@ local stdImages = [
   'restic',
   'shell',
   'syslog',
+  'tools',
   'unbound',
 ];
 local archs = ['amd64', 'arm64'];

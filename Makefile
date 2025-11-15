@@ -69,3 +69,5 @@ cron:
 	@docker push zachfi/cron:latest
 
 .PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea cron openldap_exporter motion postfix dovecot build-image restic
+
+include build/drone.mk
