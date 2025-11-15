@@ -1,16 +1,5 @@
 #
 
-.PHONY: drone drone-signature
-drone:
-	@drone jsonnet --stream --format
-	@drone lint
-
-drone-signature:
-ifndef DRONE_TOKEN
-	$(error DRONE_TOKEN is not set, visit https://drone.zach.fi/account)
-endif
-	@DRONE_SERVER=https://drone.zach.fi drone sign --save zachfi/images .drone.yml
-
 .PHONY: .github/dependabot.yml
 .github/dependabot.yml:
 	@jsonnet -S .github/dependabot.yml.jsonnet -o .github/dependabot.yml
