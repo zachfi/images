@@ -6,7 +6,7 @@ ENV GOOS=$TARGETOS GOARCH=$TARGETARCH
 RUN apk --update add --no-cache build-base bash git util-linux docker kubectl bash gcompat
 
 WORKDIR /tools
-COPY tools /tools
+COPY go.mod go.sum tools.go install.sh /tools
 RUN /tools/install.sh
-COPY tools/entrypoint.sh /bin/entrypoint.sh
+COPY entrypoint.sh /bin/entrypoint.sh
 ENTRYPOINT [ "/bin/entrypoint.sh" ]
