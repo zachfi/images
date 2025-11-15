@@ -1,4 +1,4 @@
-FROM golang:alpine3.19 as builder
+FROM golang:1.25-alpine as builder
 
 WORKDIR /workspace/
 
