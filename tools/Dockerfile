@@ -10,7 +10,7 @@ WORKDIR /tools
 COPY go.mod go.sum tools.go install.sh /tools/
 RUN /tools/install.sh
 
-FROM alpine:3.22
+FROM golang:1.25-alpine
 RUN apk --update add --no-cache build-base bash git util-linux docker kubectl bash gcompat
 COPY --from=builder /go/bin/* /usr/local/bin/
 COPY entrypoint.sh /bin/entrypoint.sh
