@@ -92,7 +92,7 @@ local localBuild(name, dry=false, purge=false, platform='linux/amd64,linux/arm64
 
 local step(name) = {
   name: name,
-  image: 'zachfi/build-image',
+  image: 'zachfi/tools',
   pull: 'always',
   commands: [],
   volumes+: [
@@ -114,7 +114,7 @@ local make(target) = step(target) {
 
 local cleanup() = {
   name: 'cleanup',
-  image: 'zachfi/build-image',
+  image: 'zachfi/tools',
   pull: 'always',
   volumes+: [
     { name: 'dockersock', path: '/var/run/docker.sock' },

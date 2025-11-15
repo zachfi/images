@@ -556,7 +556,7 @@ steps:
 - commands:
   - docker tag zachfi/aur-build-image:latest reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: aur-build-image
   pull: always
   volumes:
@@ -565,7 +565,7 @@ steps:
 - commands:
   - docker tag zachfi/chrony:latest reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: chrony
   pull: always
   volumes:
@@ -574,7 +574,7 @@ steps:
 - commands:
   - docker tag zachfi/cron:latest reg.dist.svc.cluster.znet:5000/zachfi/cron:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/cron:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: cron
   pull: always
   volumes:
@@ -583,7 +583,7 @@ steps:
 - commands:
   - docker tag zachfi/dhcp-kea:latest reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/dhcp-kea:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: dhcp-kea
   pull: always
   volumes:
@@ -592,7 +592,7 @@ steps:
 - commands:
   - docker tag zachfi/dovecot:latest reg.dist.svc.cluster.znet:5000/zachfi/dovecot:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/dovecot:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: dovecot
   pull: always
   volumes:
@@ -601,7 +601,7 @@ steps:
 - commands:
   - docker tag zachfi/nsd:latest reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: nsd
   pull: always
   volumes:
@@ -610,7 +610,7 @@ steps:
 - commands:
   - docker tag zachfi/postfix:latest reg.dist.svc.cluster.znet:5000/zachfi/postfix:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/postfix:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: postfix
   pull: always
   volumes:
@@ -619,7 +619,7 @@ steps:
 - commands:
   - docker tag zachfi/printer:latest reg.dist.svc.cluster.znet:5000/zachfi/printer:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/printer:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: printer
   pull: always
   volumes:
@@ -628,7 +628,7 @@ steps:
 - commands:
   - docker tag zachfi/restic:latest reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: restic
   pull: always
   volumes:
@@ -637,7 +637,7 @@ steps:
 - commands:
   - docker tag zachfi/shell:latest reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: shell
   pull: always
   volumes:
@@ -646,7 +646,7 @@ steps:
 - commands:
   - docker tag zachfi/syslog:latest reg.dist.svc.cluster.znet:5000/zachfi/syslog:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/syslog:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: syslog
   pull: always
   volumes:
@@ -655,7 +655,7 @@ steps:
 - commands:
   - docker tag zachfi/tools:latest reg.dist.svc.cluster.znet:5000/zachfi/tools:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/tools:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: tools
   pull: always
   volumes:
@@ -664,7 +664,7 @@ steps:
 - commands:
   - docker tag zachfi/unbound:latest reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
-  image: zachfi/build-image
+  image: zachfi/tools
   name: unbound
   pull: always
   volumes:
@@ -685,7 +685,7 @@ name: cleanup
 steps:
 - commands:
   - docker system prune -f
-  image: zachfi/build-image
+  image: zachfi/tools
   name: cleanup
   pull: always
   volumes:
@@ -700,6 +700,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: 89c41d50df72c362369b08e8aa56666fbd5b05818e69dba14e7e198747febefc
+hmac: ab8973f19fdc4869e5f0c58c29f303a93ebc2695253cee57ea037a318d211a99
 
 ...
