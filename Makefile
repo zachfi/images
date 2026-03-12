@@ -69,6 +69,10 @@ unbound:
 	@docker build unbound -t reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
 	@docker push reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
 
+restic:
+	@docker build restic -t reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
+	@docker push reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
+
 .PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea cron openldap_exporter motion postfix dovecot build-image restic
 
 include build/drone.mk
