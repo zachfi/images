@@ -57,6 +57,18 @@ cron:
 	@docker build cron -t zachfi/cron:latest
 	@docker push zachfi/cron:latest
 
+chrony:
+	@docker build chrony -t reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
+	@docker push reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
+
+nsd:
+	@docker build nsd -t reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
+	@docker push reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
+
+unbound:
+	@docker build unbound -t reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
+	@docker push reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
+
 .PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea cron openldap_exporter motion postfix dovecot build-image restic
 
 include build/drone.mk
