@@ -1,78 +1,12 @@
-#
+include build/vars.mk
 
-.PHONY: .github/dependabot.yml
-.github/dependabot.yml:
-	@jsonnet -S .github/dependabot.yml.jsonnet -o .github/dependabot.yml
+all: push-all
 
-modules:
-	@git submodule init
-	@git submodule update
+include build/docker.mk
+include build/ci.mk
 
-build-image:
-	@docker build build-image/ -t zachfi/build-image:latest
-	@docker push zachfi/build-image:latest
+# Legacy targets kept for muscle memory
+shell chrony nsd unbound restic cron aur-build-image tools: %:
+	$(MAKE) push-$@
 
-shell:
-	@docker pull archlinux/archlinux:base-devel
-	@docker build shell/ -t reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
-	@docker push reg.dist.svc.cluster.znet:5000/zachfi/shell:latest
-
-restic:
-	@docker pull alpine:3
-	@docker build restic/ -t reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
-	@docker push reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
-
-nvidia:
-	@docker build nvidia/ -t zachfi/miner:nvidia
-	@docker push zachfi/miner:nvidia
-
-xmrig:
-	@docker build xmrig/ -t zachfi/miner:xmrig
-
-miner:
-	@docker build cgminer-gekko -t zachfi/miner:cgminer-gekko
-	@docker push zachfi/miner:cgminer-gekko
-
-gomplate:
-	@docker build gomplate -t zachfi/gomplate:latest
-	@docker push zachfi/gomplate:latest
-
-openldap_exporter:
-	@docker build openldap_exporter -t zachfi/openldap_exporter:latest
-	@docker push zachfi/openldap_exporter:latest
-
-motion:
-	@docker build motion -t zachfi/motion:latest
-	@docker push zachfi/motion:latest
-
-dhcp:
-	@docker build dhcp -t zachfi/dhcp:latest
-	@docker push zachfi/dhcp:latest
-
-dhcp-kea:
-	@docker build dhcp-kea -t zachfi/dhcp-kea:latest
-	@docker push zachfi/dhcp-kea:latest
-
-cron:
-	@docker build cron -t zachfi/cron:latest
-	@docker push zachfi/cron:latest
-
-chrony:
-	@docker build chrony -t reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
-	@docker push reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
-
-nsd:
-	@docker build nsd -t reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
-	@docker push reg.dist.svc.cluster.znet:5000/zachfi/nsd:latest
-
-unbound:
-	@docker build unbound -t reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
-	@docker push reg.dist.svc.cluster.znet:5000/zachfi/unbound:latest
-
-restic:
-	@docker build restic -t reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
-	@docker push reg.dist.svc.cluster.znet:5000/zachfi/restic:latest
-
-.PHONY: all modules xmrig nvidia shell printer syslog gomplate build nsd unbound chrony dhcp dhcp-kea cron openldap_exporter motion postfix dovecot build-image restic
-
-include build/drone.mk
+.PHONY: all shell chrony nsd unbound restic cron aur-build-image tools
