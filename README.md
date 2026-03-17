@@ -1,5 +1,19 @@
 # images
 
-[![Build Status](https://drone.zach.fi/api/badges/zachfi/images/status.svg)](https://drone.zach.fi/zachfi/images)
+A collection of container images pushed to `reg.dist.svc.cluster.znet:5000/zachfi/`.
 
-A collection of images to keep track of.
+## Images
+
+`aur-build-image` `chrony` `cron` `nsd` `restic` `shell` `tools` `unbound`
+
+## Usage
+
+```bash
+make build-all         # build all images locally (no push)
+make push-all          # build + push all images to the registry
+make push-<name>       # build + push a single image  (e.g. make push-shell)
+make ci-pipeline       # regenerate .woodpecker.yml from build/woodpecker.jsonnet
+```
+
+CI runs on push via Woodpecker. Pushes to `main` build and push all images;
+PRs and non-main pushes build only.
