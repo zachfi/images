@@ -13,5 +13,6 @@ RUN /tools/install.sh
 FROM golang:1.25.4-alpine
 RUN apk --update add --no-cache build-base bash git util-linux docker kubectl bash gcompat skopeo
 COPY --from=builder /go/bin/* /usr/local/bin/
+RUN setup-envtest use 1.29.0 --bin-dir /usr/local/kubebuilder/bin -p path
 COPY entrypoint.sh /bin/entrypoint.sh
 ENTRYPOINT [ "/bin/entrypoint.sh" ]
