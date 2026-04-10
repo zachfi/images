@@ -2,18 +2,17 @@ std.manifestYamlDoc(
   {
     local names = [
       'aur-build-image',
-      'build-image',
       'chrony',
-      'dhcp',
+      'cron',
       'dhcp-kea',
       'dovecot',
       'nsd',
-      'nvidia',
-      'pkgng',
       'postfix',
       'printer',
+      'restic',
       'shell',
       'syslog',
+      'tools',
       'unbound',
     ],
 

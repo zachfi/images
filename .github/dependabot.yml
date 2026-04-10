@@ -3,15 +3,11 @@ updates:
     package-ecosystem: "docker"
     schedule:
       interval: "daily"
-  - directory: "/build-image"
-    package-ecosystem: "docker"
-    schedule:
-      interval: "daily"
   - directory: "/chrony"
     package-ecosystem: "docker"
     schedule:
       interval: "daily"
-  - directory: "/dhcp"
+  - directory: "/cron"
     package-ecosystem: "docker"
     schedule:
       interval: "daily"
@@ -27,14 +23,6 @@ updates:
     package-ecosystem: "docker"
     schedule:
       interval: "daily"
-  - directory: "/nvidia"
-    package-ecosystem: "docker"
-    schedule:
-      interval: "daily"
-  - directory: "/pkgng"
-    package-ecosystem: "docker"
-    schedule:
-      interval: "daily"
   - directory: "/postfix"
     package-ecosystem: "docker"
     schedule:
@@ -43,11 +31,19 @@ updates:
     package-ecosystem: "docker"
     schedule:
       interval: "daily"
+  - directory: "/restic"
+    package-ecosystem: "docker"
+    schedule:
+      interval: "daily"
   - directory: "/shell"
     package-ecosystem: "docker"
     schedule:
       interval: "daily"
   - directory: "/syslog"
+    package-ecosystem: "docker"
+    schedule:
+      interval: "daily"
+  - directory: "/tools"
     package-ecosystem: "docker"
     schedule:
       interval: "daily"
