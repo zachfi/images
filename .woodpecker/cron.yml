@@ -1,0 +1,38 @@
+"services":
+- "environment":
+    "DOCKER_TLS_CERTDIR": ""
+  "image": "docker:24-dind"
+  "name": "docker"
+  "privileged": true
+"skip_clone": true
+"steps":
+- "dns":
+  - "8.8.8.8"
+  - "8.8.4.4"
+  "image": "woodpeckerci/plugin-git"
+  "name": "clone"
+  "pull": true
+- "commands":
+  - "make build-cron"
+  "environment":
+    "DOCKER_HOST": "tcp://docker:2375"
+    "DOCKER_TLS_VERIFY": "0"
+  "image": "reg.dist.svc.cluster.znet:5000/zachfi/shell:latest"
+  "name": "build"
+  "pull": true
+- "commands":
+  - "make push-cron"
+  "environment":
+    "DOCKER_HOST": "tcp://docker:2375"
+    "DOCKER_TLS_VERIFY": "0"
+  "image": "reg.dist.svc.cluster.znet:5000/zachfi/shell:latest"
+  "name": "push"
+  "pull": true
+  "when":
+    "branch": "main"
+    "event": "push"
+"when":
+  "event":
+  - "push"
+  - "pull_request"
+  "path": "cron/**"

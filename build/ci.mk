@@ -1,18 +1,20 @@
 #
 # build/ci.mk — CI pipeline generation
 #
-# make ci-pipeline   Render .woodpecker.yml from build/woodpecker.jsonnet
+# make ci-pipeline   Render .woodpecker/*.yml from build/woodpecker.jsonnet
 #
 # jsonnet and jq must be available on the host.
 #
 
-CI_CONFIG         ?= .woodpecker.yml
 CI_JSONNET_SOURCE ?= build/woodpecker.jsonnet
+CI_OUTPUT_DIR     ?= .woodpecker
 
 .PHONY: ci-pipeline
 ci-pipeline:
-	jsonnet $(CI_JSONNET_SOURCE) | jq -r . > $(CI_CONFIG)
-	@echo "wrote $(CI_CONFIG)"
+	@mkdir -p $(CI_OUTPUT_DIR)
+	@rm -f $(CI_OUTPUT_DIR)/*.yml
+	@jsonnet -S -m $(CI_OUTPUT_DIR) $(CI_JSONNET_SOURCE)
+	@echo "wrote $(CI_OUTPUT_DIR)/"
 
 #
 # Drone CI helpers

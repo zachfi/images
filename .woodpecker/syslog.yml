@@ -13,24 +13,26 @@
   "name": "clone"
   "pull": true
 - "commands":
-  - "make build-all"
+  - "make build-syslog"
   "environment":
     "DOCKER_HOST": "tcp://docker:2375"
     "DOCKER_TLS_VERIFY": "0"
   "image": "reg.dist.svc.cluster.znet:5000/zachfi/shell:latest"
-  "name": "build-all"
+  "name": "build"
   "pull": true
-  "when":
-  - "event": "push"
-  - "event": "pull_request"
 - "commands":
-  - "make push-all"
+  - "make push-syslog"
   "environment":
     "DOCKER_HOST": "tcp://docker:2375"
     "DOCKER_TLS_VERIFY": "0"
   "image": "reg.dist.svc.cluster.znet:5000/zachfi/shell:latest"
-  "name": "push-all"
+  "name": "push"
   "pull": true
   "when":
-  - "branch": "main"
+    "branch": "main"
     "event": "push"
+"when":
+  "event":
+  - "push"
+  - "pull_request"
+  "path": "syslog/**"
