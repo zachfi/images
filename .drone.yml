@@ -4,26 +4,6 @@ kind: pipeline
 name: build
 steps:
 - image: plugins/docker
-  name: docker-zachfi/aur-build-image
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: aur-build-image
-    daemon_off: true
-    dockerfile: aur-build-image/Dockerfile
-    dry_run: true
-    ipv6: true
-    password:
-      from_secret: DOCKER_PASSWORD
-    purge: false
-    repo: zachfi/aur-build-image
-    username:
-      from_secret: DOCKER_USERNAME
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- image: plugins/docker
   name: docker-zachfi/chrony
   platform: linux/amd64,linux/arm64
   pull_image: true
@@ -276,26 +256,6 @@ depends_on: []
 kind: pipeline
 name: pr
 steps:
-- image: plugins/docker
-  name: docker-zachfi/aur-build-image
-  platform: linux/amd64,linux/arm64
-  pull_image: true
-  settings:
-    compress: true
-    context: aur-build-image
-    daemon_off: true
-    dockerfile: aur-build-image/Dockerfile
-    dry_run: true
-    ipv6: true
-    password:
-      from_secret: DOCKER_PASSWORD
-    purge: true
-    repo: zachfi/aur-build-image
-    username:
-      from_secret: DOCKER_USERNAME
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
 - image: plugins/docker
   name: docker-zachfi/chrony
   platform: linux/amd64,linux/arm64
@@ -554,15 +514,6 @@ kind: pipeline
 name: localpush
 steps:
 - commands:
-  - docker tag zachfi/aur-build-image:latest reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image:latest
-  - docker push reg.dist.svc.cluster.znet:5000/zachfi/aur-build-image:latest
-  image: reg.dist.svc.cluster.znet:5000/zachfi/tools
-  name: aur-build-image
-  pull: always
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-- commands:
   - docker tag zachfi/chrony:latest reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
   - docker push reg.dist.svc.cluster.znet:5000/zachfi/chrony:latest
   image: reg.dist.svc.cluster.znet:5000/zachfi/tools
@@ -700,6 +651,6 @@ volumes:
   name: dockersock
 ---
 kind: signature
-hmac: caee65fdf257dc5a3d8d9aa8478b4a759ea78d34256b99eb6b6311ce5483129f
+hmac: 105097f2f94848ca63d6ea31ed0f51208aea3a4a572c423485b66b5ecccf1417
 
 ...
