@@ -1,7 +1,6 @@
 std.manifestYamlDoc(
   {
     local names = [
-      'aur-build-image',
       'chrony',
       'cron',
       'dhcp-kea',

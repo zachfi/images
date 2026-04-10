@@ -1,8 +1,4 @@
 updates:
-  - directory: "/aur-build-image"
-    package-ecosystem: "docker"
-    schedule:
-      interval: "daily"
   - directory: "/chrony"
     package-ecosystem: "docker"
     schedule:

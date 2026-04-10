@@ -11,4 +11,4 @@ registry ?= reg.dist.svc.cluster.znet:5000
 owner    ?= zachfi
 
 # Canonical list — add/remove image dir names here only
-IMAGES := aur-build-image chrony cron dhcp-kea dovecot nsd postfix printer restic shell syslog tools unbound
+IMAGES := chrony cron dhcp-kea dovecot nsd postfix printer restic shell syslog tools unbound
