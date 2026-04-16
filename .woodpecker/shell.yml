@@ -13,7 +13,6 @@
   - "make build-shell"
   "environment":
     "DOCKER_HOST": "tcp://docker:2375"
-    "DOCKER_TLS_VERIFY": "0"
   "image": "reg.dist.svc.cluster.znet:5000/zachfi/shell:latest"
   "name": "build"
   "pull": true
@@ -21,7 +20,6 @@
   - "make push-shell"
   "environment":
     "DOCKER_HOST": "tcp://docker:2375"
-    "DOCKER_TLS_VERIFY": "0"
   "image": "reg.dist.svc.cluster.znet:5000/zachfi/shell:latest"
   "name": "push"
   "pull": true

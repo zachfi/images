@@ -29,7 +29,8 @@ local toolsImage = registry + '/' + owner + '/shell:latest';
 
 local dockerEnv = {
   DOCKER_HOST: 'tcp://docker:2375',
-  DOCKER_TLS_VERIFY: '0',
+  // DOCKER_TLS_VERIFY must NOT be set — Docker CLI enables TLS for any non-empty value,
+  // including '0'. DinD runs without TLS (DOCKER_TLS_CERTDIR: ''), so plain TCP only.
 };
 
 local services = [{
