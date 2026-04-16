@@ -48,7 +48,7 @@ local cloneStep = {
 local workflow(name) = std.manifestYamlDoc({
   when: {
     path: '%s/**' % name,
-    event: ['push', 'pull_request'],
+    event: ['push', 'pull_request', 'manual'],
   },
   skip_clone: true,
   services: services,

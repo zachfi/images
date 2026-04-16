@@ -32,4 +32,5 @@
   "event":
   - "push"
   - "pull_request"
+  - "manual"
   "path": "chrony/**"
