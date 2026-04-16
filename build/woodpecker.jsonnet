@@ -43,7 +43,6 @@ local cloneStep = {
   name: 'clone',
   image: 'woodpeckerci/plugin-git',
   pull: true,
-  dns: ['8.8.8.8', '8.8.4.4'],
 };
 
 local workflow(name) = std.manifestYamlDoc({

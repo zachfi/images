@@ -6,10 +6,7 @@
   "privileged": true
 "skip_clone": true
 "steps":
-- "dns":
-  - "8.8.8.8"
-  - "8.8.4.4"
-  "image": "woodpeckerci/plugin-git"
+- "image": "woodpeckerci/plugin-git"
   "name": "clone"
   "pull": true
 - "commands":
