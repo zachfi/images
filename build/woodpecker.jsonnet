@@ -33,13 +33,6 @@ local dockerEnv = {
   // including '0'. DinD runs without TLS (DOCKER_TLS_CERTDIR: ''), so plain TCP only.
 };
 
-local services = [{
-  name: 'docker',
-  image: 'docker:24-dind',
-  privileged: true,
-  environment: { DOCKER_TLS_CERTDIR: '' },
-}];
-
 local cloneStep = {
   name: 'clone',
   image: 'woodpeckerci/plugin-git',
@@ -52,7 +45,6 @@ local workflow(name) = std.manifestYamlDoc({
     event: ['push', 'pull_request', 'manual'],
   },
   skip_clone: true,
-  services: services,
   steps: [
     cloneStep,
     {

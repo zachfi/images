@@ -1,9 +1,3 @@
-"services":
-- "environment":
-    "DOCKER_TLS_CERTDIR": ""
-  "image": "docker:24-dind"
-  "name": "docker"
-  "privileged": true
 "skip_clone": true
 "steps":
 - "image": "woodpeckerci/plugin-git"
