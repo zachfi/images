@@ -4,6 +4,17 @@
   "name": "clone"
   "pull": true
 - "commands":
+  - "docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_TOKEN"
+  "environment":
+    "DOCKER_HOST": "tcp://docker:2375"
+    "DOCKER_HUB_TOKEN":
+      "from_secret": "docker_hub_token"
+    "DOCKER_HUB_USER":
+      "from_secret": "docker_hub_user"
+  "image": "reg.dist.svc.cluster.znet:5000/zachfi/shell:latest"
+  "name": "docker-login"
+  "pull": true
+- "commands":
   - "make build-shell"
   "environment":
     "DOCKER_HOST": "tcp://docker:2375"

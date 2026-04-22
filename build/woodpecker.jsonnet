@@ -39,6 +39,19 @@ local cloneStep = {
   pull: true,
 };
 
+// Authenticate to Docker Hub before builds to avoid anonymous rate limits.
+// Secrets managed as Woodpecker org secrets: docker_hub_user, docker_hub_token.
+local dockerLoginStep = {
+  name: 'docker-login',
+  image: toolsImage,
+  pull: true,
+  environment: dockerEnv + {
+    DOCKER_HUB_USER: { from_secret: 'docker_hub_user' },
+    DOCKER_HUB_TOKEN: { from_secret: 'docker_hub_token' },
+  },
+  commands: ['docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_TOKEN'],
+};
+
 local workflow(name) = std.manifestYamlDoc({
   when: {
     path: '%s/**' % name,
@@ -47,6 +60,7 @@ local workflow(name) = std.manifestYamlDoc({
   skip_clone: true,
   steps: [
     cloneStep,
+    dockerLoginStep,
     {
       name: 'build',
       image: toolsImage,
